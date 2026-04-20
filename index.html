@@ -6,7 +6,6 @@
 <title>CEO Stress Simulator</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ═══ ORIGINAL CSS RESTORED ═══ */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#121212;--s1:#1a1a1a;--s2:#1e1e1e;--s3:#252525;--s4:#2c2c2c;--border:rgba(255,255,255,0.06);--b2:rgba(255,255,255,0.1);--amber:#d97706;--al:#f59e0b;--ad:rgba(217,119,6,0.12);--a3:rgba(217,119,6,0.25);--green:#22c55e;--red:#ef4444;--t1:#f5f5f5;--t2:#a3a3a3;--t3:#525252;--r:8px;--rl:14px}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
@@ -31,12 +30,16 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:16px 4
 .pt{width:0;height:0;border-style:solid;border-width:11px 0 11px 20px;border-color:transparent transparent transparent var(--al);margin-left:3px}
 .vl{font-size:.72rem;font-weight:600;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;z-index:1}.vs{font-size:.65rem;color:var(--t3);z-index:1}
 
+.epb{max-width:1080px;margin:0 auto;padding:0 48px}
+.ep{background:var(--s2);border:1px solid var(--a3);border-radius:var(--rl);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.ept h3{font-size:.95rem;font-weight:800;color:var(--al);margin-bottom:3px}.ept p{font-size:.8rem;color:var(--t2);line-height:1.55}
+.epn{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;padding:10px 22px;border-radius:var(--r);border:none;background:var(--amber);color:#fff;cursor:pointer;white-space:nowrap}.epn:hover{background:var(--al)}
+.epp{font-size:.6rem;color:var(--t3);margin-top:3px;text-align:center}
+
 .sb{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--s1)}
 .si{display:flex;justify-content:center;max-width:1080px;margin:0 auto}
 .sti{padding:24px 44px;text-align:center;border-right:1px solid var(--border)}.sti:last-child{border-right:none}
 .stn{font-size:1.8rem;font-weight:800;color:var(--al)}.stl{font-size:.65rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;font-weight:500}
-.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:8px;box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%{opacity:1} 50%{opacity:0.4} 100%{opacity:1}}
 
 .section{max-width:1080px;margin:0 auto;padding:80px 48px}
 .se{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--al);margin-bottom:10px;display:flex;align-items:center;gap:8px}.se::before{content:'';width:14px;height:2px;background:var(--amber);display:inline-block}
@@ -53,312 +56,565 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:16px 4
 #js{position:absolute;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.95);border-radius:var(--rl)}#js.active{display:flex}
 @keyframes jp{0%{transform:scale(.3) rotate(-10deg);opacity:0}40%{transform:scale(1.3) rotate(5deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
 #js.active img{animation:jp .5s cubic-bezier(.2,1.5,.4,1) forwards;width:65%;max-width:280px}
+@keyframes ms{0%,100%{transform:translate(0)}10%{transform:translate(-8px,6px)}30%{transform:translate(10px,-8px)}50%{transform:translate(-6px,4px)}70%{transform:translate(8px,-4px)}90%{transform:translate(-4px,6px)}}.mshk{animation:ms .5s cubic-bezier(.36,.07,.19,.97)}
 #dblk{position:absolute;z-index:30;bottom:0;left:0;right:0;display:none;align-items:flex-end;justify-content:center;pointer-events:none;transition:transform .5s ease-out}
 #dblk.active{display:flex}
 #dblk img{width:55%;max-width:240px}
 @keyframes slideUp{0%{transform:translateY(100%)}100%{transform:translateY(0)}}
 #dblk.active img{animation:slideUp .5s ease-out forwards}
+.doodle{position:absolute;width:32px;height:32px;opacity:.04;pointer-events:none;z-index:0}.doodle img{width:100%;height:100%}
+.dtl{top:6px;left:6px;transform:rotate(-15deg)}.dtr{top:6px;right:6px;transform:rotate(20deg) scaleX(-1)}.dbl{bottom:6px;left:6px;transform:rotate(10deg)}.dbr{bottom:6px;right:6px;transform:rotate(-25deg) scaleX(-1)}
 
-/* SIGN IN / MODES CSS RESTORED */
+/* AVATAR FILTERS */
+.av-intern{filter:grayscale(1)}.av-manager{filter:sepia(1) saturate(1.8)}.av-ceo{filter:contrast(1.4) saturate(1.5) brightness(1.1)}.av-crisis{filter:invert(1) sepia(1) saturate(5) hue-rotate(0deg) brightness(.9)}
+
+/* SIGN IN */
 .sf{display:flex;flex-direction:column;gap:10px;width:100%;max-width:320px}
 .sf label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:-4px}
-.sf input{font-family:'Inter',sans-serif;font-size:.82rem;padding:9px 12px;border-radius:var(--r);border:1px solid var(--b2);background:var(--s3);color:var(--t1);outline:none}
+.sf input[type="text"],.sf input[type="email"]{font-family:'Inter',sans-serif;font-size:.82rem;padding:9px 12px;border-radius:var(--r);border:1px solid var(--b2);background:var(--s3);color:var(--t1);outline:none}.sf input:focus{border-color:var(--amber)}.sf input::placeholder{color:var(--t3)}
 .avg{display:flex;gap:8px;margin:4px 0;flex-wrap:wrap;align-items:center}
-.avo{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--b2);cursor:pointer;overflow:hidden;position:relative}
+.avo{width:48px;height:48px;border-radius:50%;border:2.5px solid var(--b2);cursor:pointer;overflow:hidden;transition:border-color .2s,transform .15s;flex-shrink:0;position:relative}.avo:hover{transform:scale(1.08)}.avo.sel{border-color:var(--amber);box-shadow:0 0 0 3px var(--ad)}
 .avo img{width:100%;height:100%;object-fit:cover}
-.avo.sel{border-color:var(--amber);box-shadow:0 0 0 3px var(--ad)}
+.avo-label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);font-size:.35rem;font-weight:700;color:#fff;text-align:center;padding:1px 0;letter-spacing:.06em;text-transform:uppercase}
+.aub{font-family:'Inter',sans-serif;font-size:.65rem;font-weight:600;padding:5px 10px;border-radius:var(--r);border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer}.aub:hover{color:var(--t1)}
+.sie{font-size:.7rem;color:#f87171;min-height:16px}
+.sis{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;padding:11px 26px;border-radius:var(--r);border:none;background:var(--amber);color:#fff;cursor:pointer;margin-top:4px}.sis:hover{background:var(--al)}
+kbd{background:var(--s3);border:1px solid var(--b2);border-radius:4px;padding:2px 6px;font-family:'Inter',monospace;font-size:.68rem;color:var(--t2)}
 
+/* MODE SELECT */
 .mg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:560px}
-.mc{background:var(--s3);border:1.5px solid var(--b2);border-radius:var(--r);padding:16px 14px;cursor:pointer;text-align:left;position:relative}
-.mc:hover:not(.locked){border-color:var(--al);background:rgba(255,255,255,.03);transform:translateY(-2px)}
+.mc{background:var(--s3);border:1.5px solid var(--b2);border-radius:var(--r);padding:16px 14px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s,transform .15s;position:relative}
+.mc:hover:not(.locked){border-color:var(--mcc,var(--b2));background:rgba(255,255,255,.03);transform:translateY(-2px)}
+.mc.locked{opacity:.45;cursor:not-allowed}
 .md{width:9px;height:9px;border-radius:50%;margin-bottom:7px}.mn{font-size:.88rem;font-weight:700;margin-bottom:2px}.mds{font-size:.68rem;color:var(--t3);line-height:1.45}
+.mt{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:5px}
+.mms{font-size:.52rem;font-weight:700;color:var(--al);margin-top:3px}
+.badge{position:absolute;top:8px;right:8px;font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:8px}
+.badge-lock{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.badge-done{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25);display:none}
+.redeem-row{display:flex;gap:8px;margin-top:18px;width:100%;max-width:300px}
+.redeem-row input{flex:1;font-family:'Inter',sans-serif;font-size:.78rem;padding:8px 10px;border-radius:var(--r);border:1px solid var(--b2);background:var(--s3);color:var(--t1);outline:none}.redeem-row input:focus{border-color:var(--amber)}.redeem-row input::placeholder{color:var(--t3)}
+.redeem-btn{font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;padding:8px 14px;border-radius:var(--r);border:none;background:var(--s4);color:var(--t2);cursor:pointer;white-space:nowrap}.redeem-btn:hover{color:var(--t1)}
 
-/* SHOP & PLAY CSS RESTORED */
+/* SHOP */
+.shg{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px;margin-bottom:18px}
+.shi{background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:12px;text-align:center;cursor:pointer;transition:border-color .2s,transform .15s}
+.shi:hover{border-color:var(--amber);transform:translateY(-2px)}.shi.bought{border-color:var(--green);opacity:.65;cursor:not-allowed}
+.shic{font-size:1.2rem;margin-bottom:4px}.shin{font-size:.75rem;font-weight:700;margin-bottom:2px}.shid{font-size:.58rem;color:var(--t3);margin-bottom:5px;line-height:1.3}.ship{font-size:.68rem;font-weight:700;color:var(--al)}
+
+/* PLAY */
+#ps{padding:0;justify-content:flex-start;min-height:500px}
 #mb{width:100%;display:grid;border-bottom:1px solid var(--border)}
-.met{padding:10px;background:var(--s2);text-align:center;border-right:1px solid var(--border)}.met:last-child{border-right:none}
-.mbg{height:3px;border-radius:2px;background:rgba(255,255,255,.05);overflow:hidden}
-.mf{height:100%;border-radius:2px;transition:width .35s ease}
-#ut{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--al);color:#fff;padding:10px 24px;border-radius:30px;font-weight:700;z-index:1000;opacity:0;transition:0.3s}
-#ut.show{opacity:1;bottom:40px}
+.met{padding:10px 10px;background:var(--s2);text-align:center;border-right:1px solid var(--border)}.met:last-child{border-right:none}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.ml{font-size:.5rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}.mv{font-size:.62rem;font-weight:700;color:var(--t2);font-variant-numeric:tabular-nums}
+.mbg{height:3px;border-radius:2px;overflow:hidden;background:rgba(255,255,255,.05)}.mf{height:100%;border-radius:2px;transition:width .35s ease}
+#vb{width:100%;padding:10px 18px;background:var(--s2);border-bottom:1px solid var(--border);display:none}
+.vh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}.vbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f87171}
+#va{font-size:1.2rem;font-weight:800;color:#f87171;font-variant-numeric:tabular-nums}#vpl{font-size:.68rem;font-weight:700}
+#vbbg{height:4px;border-radius:2px;overflow:hidden;background:rgba(255,255,255,.05)}#vbf{height:100%;background:#ef4444;border-radius:2px;transition:width .35s ease;width:100%}
+#tw{width:100%;height:3px;background:rgba(255,255,255,.04)}#tb{height:100%;width:100%;transition:width .05s linear}
+#pb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 32px 18px;width:100%;position:relative}
+.ptop{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:520px;margin-bottom:14px}
+.pmeta{display:flex;align-items:center;gap:8px}
+.mi{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:8px}
+#dc{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.dg{font-size:.5rem;color:var(--t3)}
+#bq{font-family:'Inter',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:6px;border:1px solid rgba(239,68,68,.2);background:rgba(239,68,68,.06);color:#f87171;cursor:pointer}#bq:hover{background:rgba(239,68,68,.14)}
+#qc{display:none;position:absolute;inset:0;background:rgba(18,18,18,.9);backdrop-filter:blur(6px);z-index:10;flex-direction:column;align-items:center;justify-content:center;border-radius:var(--rl)}#qc.show{display:flex}
+.qbox{background:var(--s3);border:1px solid var(--b2);border-radius:var(--rl);padding:26px 28px;text-align:center;max-width:300px}
+.qbox h3{font-size:.95rem;font-weight:800;margin-bottom:5px}.qbox p{font-size:.78rem;color:var(--t2);line-height:1.55;margin-bottom:16px}
+.qbs{display:flex;gap:8px;justify-content:center}
+.qb{font-family:'Inter',sans-serif;font-size:.75rem;font-weight:700;padding:8px 18px;border-radius:var(--r);border:none;cursor:pointer}.qr{background:#ef4444;color:#fff}.qg{background:var(--s4);color:var(--t2);border:1px solid var(--b2)}.qg:hover{color:var(--t1)}
+#stxt{font-size:1rem;font-weight:600;line-height:1.7;margin-bottom:26px;min-height:70px;color:var(--t1);max-width:520px;text-align:center}
+#br{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.db{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;padding:10px 24px;border:none;border-radius:var(--r);cursor:pointer;letter-spacing:.05em;text-transform:uppercase;transition:transform .1s,filter .15s}.db:active{transform:scale(.95)}
+#by{background:var(--green);color:#052e16}#by:hover{filter:brightness(1.12)}
+#bn{background:var(--red);color:#fff}#bn:hover{filter:brightness(1.12)}
+#bsl{font-family:'Inter',sans-serif;background:#f59e0b;color:#1c0a00;font-size:.8rem;font-weight:700;padding:10px 22px;border:none;border-radius:var(--r);cursor:pointer;display:none}
 
-/* LEADERBOARD & TESTIMONIALS RESTORED */
+/* GAME OVER */
+#os{padding:22px 26px;gap:0;min-height:auto;align-items:stretch;text-align:left}
+#ot{font-size:1.3rem;font-weight:800;margin-bottom:3px;color:#ef4444}
+#or{font-size:.8rem;color:var(--t2);line-height:1.65;max-width:440px}
+.od{font-size:.75rem;color:var(--t3);margin:6px 0 10px}.od strong{color:var(--al);font-size:1.1rem;font-weight:800;display:block;line-height:1.1;margin-bottom:2px}
+.go-img{width:100%;max-width:200px;border-radius:var(--r);margin:0 auto 12px;display:block}
+.fb{background:var(--s3);border:1px solid var(--b2);border-radius:var(--r);padding:14px;width:100%;margin-bottom:10px}
+.ft{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--al);margin-bottom:8px;display:flex;align-items:center;gap:6px}.ft::before{content:'';width:10px;height:2px;background:var(--amber);display:inline-block}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.fs{background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:7px 9px}.fsl{font-size:.5rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:1px}.fsv{font-size:.82rem;font-weight:800}
+.ftext{font-size:.75rem;color:var(--t2);line-height:1.65;border-top:1px solid var(--border);padding-top:6px}.ftext strong{color:var(--t1);font-weight:600}
+.obs{display:flex;gap:6px;width:100%;flex-wrap:wrap}
+.ob{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:700;padding:8px 14px;border-radius:var(--r);border:none;cursor:pointer;transition:filter .2s}
+.ob-a{background:var(--amber);color:#fff}.ob-a:hover{background:var(--al)}
+.ob-g{background:var(--s4);color:var(--t2);border:1px solid var(--b2)}.ob-g:hover{color:var(--t1)}
+.ob-gr{background:var(--green);color:#052e16}.ob-gr:hover{filter:brightness(1.12)}
+
+/* MODALS */
+.modal{position:absolute;inset:0;z-index:55;display:none;align-items:center;justify-content:center;background:rgba(18,18,18,.92);backdrop-filter:blur(8px);border-radius:var(--rl);flex-direction:column}.modal.active{display:flex}
+.mbox{background:var(--s3);border:1px solid var(--b2);border-radius:var(--rl);padding:28px 32px;text-align:center;max-width:380px;width:calc(100% - 20px)}
+.mbox h3{font-size:1rem;font-weight:800;margin-bottom:5px}
+.mbox p{font-size:.78rem;color:var(--t2);line-height:1.6;margin-bottom:12px}
+.ad-spinner{width:36px;height:36px;border:3px solid var(--b2);border-top-color:var(--al);border-radius:50%;animation:spin .7s linear infinite;margin:10px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ad-timer{font-size:2rem;font-weight:800;color:var(--al);margin:6px 0}
+.ad-bar-bg{width:100%;height:3px;border-radius:2px;background:rgba(255,255,255,.06);margin:6px 0;overflow:hidden}.ad-bar-fill{height:100%;background:var(--amber);border-radius:2px;transition:width .3s linear}
+.ad-status{font-size:.72rem;color:var(--t3);margin-bottom:6px}
+.mbtn{font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;padding:10px 26px;border-radius:var(--r);border:none;cursor:pointer;margin-top:6px}.mbtn:disabled{opacity:.3;cursor:not-allowed}
+.mbtn-a{background:var(--amber);color:#fff}.mbtn-a:hover{background:var(--al)}
+.mbtn-g{background:var(--s4);color:var(--t2);border:1px solid var(--b2)}.mbtn-g:hover{color:var(--t1)}
+.verify-note{font-size:.65rem;color:var(--t3);margin-top:8px;line-height:1.5}
+
+/* PROMO */
+.pi{font-size:2.4rem;margin-bottom:12px;line-height:1}
+.promo-img{width:180px;border-radius:var(--r);margin:0 auto 14px;display:block}
+#pt2{font-size:1.5rem;font-weight:800;color:var(--green);margin-bottom:5px}
+#pst{font-size:.88rem;color:var(--t2);margin-bottom:20px;line-height:1.7;max-width:360px}
+.pbtn{font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;padding:11px 28px;border-radius:var(--r);border:none;background:var(--amber);color:#fff;cursor:pointer}.pbtn:hover{background:var(--al)}
+
+#sus{padding:32px;min-height:auto;text-align:center}#sus h2{font-size:1.5rem;font-weight:800;color:var(--al);margin-bottom:6px}
+.sv{font-size:2rem;font-weight:800;color:var(--green);margin:8px 0 5px;font-variant-numeric:tabular-nums}
+.prb{display:inline-block;padding:3px 12px;border-radius:16px;font-size:.68rem;font-weight:700;margin-bottom:14px}
+.prp{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}.prn{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.sst{font-size:.8rem;color:var(--t2);margin-bottom:16px;line-height:1.65;max-width:320px}
+.win-img{width:180px;border-radius:var(--r);margin:0 auto 14px;display:block}
+#fs{padding:28px;min-height:auto;text-align:center}#fs h2{font-size:1.4rem;font-weight:800;color:var(--t3);margin-bottom:6px}.fn{font-size:.78rem;color:var(--t2);line-height:1.65;margin:8px 0 16px;max-width:320px}
+
 .lbs{max-width:840px;margin:0 auto;padding:60px 48px}
 .lbt{width:100%;border-collapse:collapse;margin-top:20px}
-.lbt th{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);padding:8px;text-align:left;border-bottom:1px solid var(--b2)}
+.lbt th{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);padding:8px 9px;text-align:left;border-bottom:1px solid var(--b2)}
 .lbt td{font-size:.78rem;padding:9px;border-bottom:1px solid var(--border);color:var(--t2)}
+.lnc{display:flex;align-items:center;gap:7px}
+.la{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid var(--b2);flex-shrink:0}
+.ln{font-weight:700;color:var(--t1)!important}
+.lem{font-size:.8rem;color:var(--t3);padding:28px;text-align:center;font-style:italic}
+
+.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.hc{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:20px 16px}
+.hn{font-size:.55rem;font-weight:700;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.ht{font-size:.85rem;font-weight:700;margin-bottom:4px}.hd{font-size:.72rem;color:var(--t3);line-height:1.65}
+.ds{background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dg2{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.dc{background:var(--s1);padding:28px 22px}
+.dk{font-size:.62rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--al);margin-bottom:7px}
+.dtt{font-size:.95rem;font-weight:700;margin-bottom:7px}.dbo{font-size:.78rem;color:var(--t2);line-height:1.75}
 .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .tc{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:20px 16px;display:flex;flex-direction:column;gap:12px}
-.tq{font-style:italic;color:var(--t2);font-size:0.8rem;line-height:1.6}
-.tnm{font-weight:700;color:var(--al);font-size:0.75rem}
+.tp{width:42px;height:42px;border-radius:50%;background:var(--s3);border:2px solid var(--b2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tpp{font-size:.5rem;font-weight:700;color:var(--t3);text-align:center;line-height:1.2}
+.tq{font-size:.78rem;color:var(--t2);line-height:1.7;margin-bottom:8px;font-style:italic}.tq::before{content:'\201C';color:var(--amber);font-size:1.1rem;font-style:normal;line-height:0;vertical-align:-.25em;margin-right:3px}
+.tnm{font-size:.78rem;font-weight:700}.trl{font-size:.65rem;color:var(--t3);margin-top:1px}
+footer{border-top:1px solid var(--border);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.fc{font-size:.68rem;color:var(--t3)}.ftg{font-size:.68rem;color:var(--t3)}.ftg span{color:var(--al)}
+#ut{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--s3);border:1px solid var(--a3);border-radius:var(--r);padding:12px 22px;font-size:.8rem;font-weight:600;color:var(--al);z-index:200;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:0;pointer-events:none}#ut.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:768px){.hero{grid-template-columns:1fr;padding:50px 24px}.si{flex-wrap:wrap}.sti{padding:18px 18px;border-right:none;border-bottom:1px solid var(--border)}.section,.gs,.lbs{padding:50px 24px}nav{padding:14px 20px}.dg2,.tg,.mg{grid-template-columns:1fr}footer{padding:16px 20px}.ep{flex-direction:column;text-align:center}.epb{padding:0 24px}.shg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div id="ut"></div>
+<nav><span class="logo">CEO.SIM</span><div class="nr"><span class="nb">Free to Play</span><div id="nua"></div><button class="nc" onclick="scrollTo_()">Play Now</button></div></nav>
 
-<nav>
-    <div class="logo">CEO STRESS SIMULATOR</div>
-    <div class="nr">
-        <div class="nb">TETR EVENT 2024</div>
-        <div id="nua"></div>
-        <button class="nc" onclick="scrollTo_()">PLAY NOW</button>
-    </div>
-</nav>
+<section class="hero"><div><div class="he">Founder Simulation</div><h1>Can you survive<br>the <em>startup grind?</em></h1><p class="hs">Climb from intern to CEO across a 31-day career arc. Four difficulty modes, hundreds of unique scenarios, and a mascot that doesn't forgive mistakes.</p><div class="ha"><button class="bp" onclick="scrollTo_()"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="3,1 13,7 3,13" fill="white"/></svg> Play Now</button><button class="bg" onclick="document.getElementById('da').scrollIntoView({behavior:'smooth'})">Learn More</button></div></div><div class="vp"><div class="pc"><div class="pt"></div></div><div class="vl">Founder at TETR Event</div><div class="vs">Replace with your embedded video</div></div></section>
 
-<div class="hero">
-    <div>
-        <div class="he">Founder Training</div>
-        <h1>The <em>High-Stakes</em> Boardroom Sim.</h1>
-        <p class="hs">Compress years of startup stress into 31 days. Manage valuation, mental health, and the unexpected.</p>
-        <div class="ha">
-            <button class="bp" onclick="scrollTo_()">Start Simulation →</button>
-            <button class="bg">Read Docs</button>
-        </div>
+<div class="epb"><div class="ep"><div class="ept"><h3>Executive Pass — Skip the Grind</h3><p>Unlock Bear Market mode instantly via PayPal. No need to survive 31 CEO days.</p></div><div style="text-align:center"><button class="epn" onclick="buyEP()">Unlock Now — 0.99&euro;</button><div class="epp">+ applicable taxes</div></div></div></div>
+
+<div class="sb"><div class="si"><div class="sti"><div class="stn">31</div><div class="stl">Days to survive</div></div><div class="sti"><div class="stn">4</div><div class="stl">Career stages</div></div><div class="sti"><div class="stn">70+</div><div class="stl">Scenarios / mode</div></div><div class="sti"><div class="stn">1</div><div class="stl">Angry mascot</div></div></div></div>
+
+<div id="ga"><section class="gs">
+<div class="se">The Simulator</div><h2 class="st" style="margin-bottom:5px">Your career starts here.</h2><p style="font-size:.82rem;color:var(--t3);margin-bottom:26px"><kbd>Y</kbd> = Yes &nbsp;|&nbsp; <kbd>N</kbd> = No</p>
+
+<div id="gw">
+  <div id="df"></div>
+  <div id="js"><img id="jsimg" alt="Jumpscare"/></div>
+  <div id="dblk"><img id="dbimg" alt="Blockade"/></div>
+  <div class="doodle dtl"><img class="di" alt=""/></div><div class="doodle dtr"><img class="di" alt=""/></div><div class="doodle dbl"><img class="di" alt=""/></div><div class="doodle dbr"><img class="di" alt=""/></div>
+  <div id="qc"><div class="qbox"><h3>Hand in your notice?</h3><p>Forfeit this run?</p><div class="qbs"><button class="qb qr" onclick="doQuit()">Yes, I quit</button><button class="qb qg" onclick="cancelQ()">Stay</button></div></div></div>
+
+  <!-- AD MODAL -->
+  <div class="modal" id="adm"><div class="mbox"><h3>Streak Saver</h3><p>Watch a short ad to restore metrics and continue.</p><div><div class="ad-spinner"></div><div class="ad-timer" id="adt">15</div><div class="ad-bar-bg"><div class="ad-bar-fill" id="adb"></div></div><div class="ad-status" id="ads">Loading ad…</div></div><button class="mbtn mbtn-a" id="adc" disabled onclick="finishRevive()">Continue Playing</button></div></div>
+
+  <!-- EBOOK MODAL -->
+  <div class="modal" id="ebm"><div class="mbox"><div style="font-size:2rem;margin-bottom:8px" id="ebi">&#128218;</div><div style="font-size:1rem;font-weight:800;color:var(--al);margin-bottom:5px" id="ebt">E-Book</div><div style="font-size:.8rem;color:var(--t2);line-height:1.6;margin-bottom:14px" id="ebd"></div><a class="mbtn mbtn-a" id="ebb" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;text-align:center;width:100%">Buy — 2.49&euro;</a><div style="font-size:.55rem;color:var(--t3);margin:4px 0 10px">+ applicable taxes</div><button class="mbtn mbtn-g" onclick="closeEb()">No thanks</button></div></div>
+
+  <!-- PAYPAL VERIFY MODAL -->
+  <div class="modal" id="pvm"><div class="mbox"><h3 id="pvt">Waiting for payment…</h3><p id="pvd">Complete the PayPal payment, then click Verify below.</p><div class="ad-spinner"></div><button class="mbtn mbtn-a" id="pvv" onclick="verifyPayment()">I've Paid — Verify</button><button class="mbtn mbtn-g" style="margin-top:6px" onclick="closePV()">Cancel</button><div class="verify-note">This uses an honor system. Your access is granted immediately upon clicking Verify.</div></div></div>
+
+  <!-- SIGN IN -->
+  <div id="sis" class="scr active">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:5px">Welcome, Founder</h2>
+    <p style="font-size:.82rem;color:var(--t2);margin-bottom:22px">Sign in to track your career and compete on the leaderboard.</p>
+    <div class="sf">
+      <label>Your name</label><input type="text" id="sin" placeholder="e.g. Alex Chen" maxlength="30"/>
+      <label>Email</label><input type="email" id="sieml" placeholder="alex@company.com"/>
+      <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-top:4px">Choose avatar</div>
+      <div class="avg" id="avg"></div>
+      <div class="sie" id="sierr"></div>
+      <button type="button" class="sis" onclick="doSignIn()">Start Your Career</button>
     </div>
-    <div class="vp">
-        <div class="pc"><div class="pt"></div></div>
-        <div class="vl">TETR Trailer</div>
-        <div class="vs">Watch the carnage</div>
+  </div>
+
+  <!-- MODE SELECT -->
+  <div id="mss" class="scr">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:5px">Choose Your Role</h2>
+    <p style="font-size:.8rem;color:var(--t2);margin-bottom:16px">Survive 31 days per role. Bear Market is the final challenge.</p>
+    <div style="font-size:.62rem;color:var(--t3);margin-bottom:16px"><strong style="color:var(--t2)">Path:</strong> Intern → Manager → CEO → Bear Market</div>
+    <div class="mg" id="mgrid"></div>
+    <div class="redeem-row"><input type="text" id="redeem-input" placeholder="Redeem code…"/><button class="redeem-btn" onclick="redeemCode()">Redeem</button></div>
+  </div>
+
+  <!-- SHOP -->
+  <div id="shs" class="scr">
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:3px">Founder Shop</h2>
+    <p style="font-size:.8rem;color:var(--t2);margin-bottom:18px">Spend credits on one-time boosters for this run.</p>
+    <div style="font-size:.7rem;font-weight:700;color:var(--al);margin-bottom:14px">Credits: <span style="font-size:1rem;font-weight:800" id="scr">500</span></div>
+    <div class="shg" id="shg"></div>
+    <button style="font-family:'Inter',sans-serif;font-size:.85rem;font-weight:700;padding:11px 28px;border-radius:var(--r);border:none;background:var(--amber);color:#fff;cursor:pointer" onclick="startFromShop()">Start Run</button>
+  </div>
+
+  <!-- PLAY -->
+  <div id="ps" class="scr">
+    <div id="mb"></div>
+    <div id="vb"><div class="vh"><span class="vbl">Valuation</span><span id="vsl" style="font-size:.65rem;color:var(--t3)">Start: $5M</span></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span id="va">$5,000,000</span><span id="vpl"></span></div><div id="vbbg"><div id="vbf"></div></div></div>
+    <div id="tw"><div id="tb"></div></div>
+    <div id="pb">
+      <div class="ptop"><div class="pmeta"><div class="mi" id="mind">CEO</div><div id="dc">Day <span id="dn">0</span><span class="dg" id="dgl"> / 31</span></div></div><button id="bq" onclick="promptQ()">2 Weeks Notice</button></div>
+      <div id="stxt"></div>
+      <div id="br"><button class="db" id="by">YES (Y)</button><button class="db" id="bn">NO (N)</button><button id="bsl" onclick="doSell()">Sell Company</button></div>
     </div>
+  </div>
+
+  <!-- GAME OVER -->
+  <div id="os" class="scr">
+    <div style="margin-bottom:10px"><div id="ot">Game Over</div><p id="or"></p></div>
+    <img id="go-img" class="go-img" alt="" style="display:none"/>
+    <div class="od"><strong id="dsv">0</strong> days survived</div>
+    <div class="fb"><div class="ft">Performance Review</div><div class="fg"><div class="fs"><div class="fsl">Days</div><div class="fsv" id="fbd">0</div></div><div class="fs"><div class="fsl">Collapsed</div><div class="fsv" id="fbm">—</div></div><div class="fs"><div class="fsl">Strongest</div><div class="fsv" id="fbb">—</div></div><div class="fs"><div class="fsl">Grade</div><div class="fsv" id="fbg">—</div></div></div><div class="ftext" id="fbt"></div></div>
+    <div class="obs" id="over-btns"></div>
+  </div>
+
+  <!-- PROMO -->
+  <div id="prs" class="scr"><div class="pi" id="pri">&#127881;</div><img id="win-img" class="promo-img" alt="" style="display:none"/><div id="pt2">Promoted!</div><p id="pst" style="font-size:.88rem;color:var(--t2);margin-bottom:20px;line-height:1.65;max-width:360px"></p><button class="pbtn" onclick="toMode()">Continue</button></div>
+  <!-- SUCCESS -->
+  <div id="sus" class="scr"><div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--al);margin-bottom:8px">Successful Exit</div><h2>You Sold the Company</h2><img id="sell-win-img" class="win-img" alt="" style="display:none"/><div class="sv" id="suv">$0</div><div id="supb" class="prb prp"></div><p class="sst" id="sut"></p><button class="ob ob-g" onclick="toMode()">Play Again</button></div>
+  <!-- FORFEIT -->
+  <div id="fs" class="scr"><div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">Voluntary Exit</div><h2>You handed in your notice.</h2><p class="fn" id="fnt"></p><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="ob ob-a" onclick="startGame()">Try Again</button><button class="ob ob-g" onclick="toMode()">Change Mode</button></div></div>
 </div>
+</section></div>
 
-<div class="sb">
-    <div class="si">
-        <div class="sti"><div class="stn" id="totalPlayed">14,208</div><div class="stl">Total Successes</div></div>
-        <div class="sti"><div class="stn" id="liveUsers"><span class="dot"></span> 42</div><div class="stl">Live Founders</div></div>
-        <div class="sti"><div class="stn" id="avgStress">88%</div><div class="stl">Avg. Stress Level</div></div>
-    </div>
-</div>
+<div style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)"><section class="lbs"><div class="se">Global Rankings</div><h2 class="st" style="margin-bottom:5px">Bear Market Leaderboard</h2><p style="font-size:.82rem;color:var(--t3)">Only Crisis mode scores qualify.</p><div id="lbc"><div class="lem">Loading…</div></div></section></div>
 
-<section class="section" id="ga">
-    <div class="gs">
-        <div id="gw">
-            <div id="df"></div>
+<section class="section"><div class="se">The Career Arc</div><h2 class="st">31 days. 4 promotions. 1 mascot.</h2><p class="ss">Climb the ladder — but beware the donkey.</p><div class="hg"><div class="hc"><div class="hn">Level 1</div><div class="ht">Intern → Hired</div><div class="hd">Office politics and deadlines. 31 days to prove yourself.</div></div><div class="hc"><div class="hn">Level 2</div><div class="ht">Manager → Founder</div><div class="hd">Budget, team, product. 31 days to earn founder stripes.</div></div><div class="hc"><div class="hn">Level 3</div><div class="ht">CEO → Bear Market</div><div class="hd">Boardroom strategy. 31 days to unlock the final challenge.</div></div><div class="hc"><div class="hn">Final</div><div class="ht">Bear Market</div><div class="hd">One metric. Lose-lose. Jumpscares. Global leaderboard.</div></div></div></section>
 
-            <div id="sis" class="scr active">
-                <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:5px">Welcome, Founder</h2>
-                <p style="font-size:.82rem;color:var(--t2);margin-bottom:22px">Sign in to track your career.</p>
-                <div class="sf">
-                    <label>Your name</label><input type="text" id="sin" placeholder="e.g. Alex Chen" maxlength="30"/>
-                    <label>Email</label><input type="email" id="sieml" placeholder="alex@company.com"/>
-                    <div class="avg" id="avg"></div>
-                    <div class="sie" id="sierr" style="color:var(--red);font-size:0.7rem;min-height:1rem"></div>
-                    <button type="button" class="sis bp" onclick="doSignIn()">Start Your Career</button>
-                </div>
-            </div>
+<div class="ds" id="da"><div class="dg2"><div class="dc"><div class="dk">What</div><div class="dtt">A stress-test for founders</div><div class="dbo">Compresses months of startup chaos into minutes of high-stakes decisions. Plus a mascot that punishes your mistakes.</div></div><div class="dc"><div class="dk">Why</div><div class="dtt">Build business instincts</div><div class="dbo">Trains pattern recognition under pressure. Surfaces cognitive biases before real money is on the line.</div></div><div class="dc"><div class="dk">When</div><div class="dtt">Team training &amp; prep</div><div class="dbo">Icebreakers, pre-launch readiness, accelerator demos, or scaring your co-founder.</div></div></div></div>
 
-            <div id="ms" class="scr">
-                <h2 style="margin-bottom:20px">Choose Your Path</h2>
-                <div class="mg" id="mgrid"></div>
-            </div>
+<section class="section"><div class="se">Testimonials</div><h2 class="st">What founders say</h2><p class="ss">Real feedback from stress-tested founders.</p><div class="tg"><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">I lasted 14 days then the donkey showed up. My whole team screamed.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">We ran this at our offsite. The debrief was worth more than any consultant.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">The Performance Review is brutally accurate. Same blind spot my investors flagged.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div></div></section>
 
-            <div id="ps" class="scr">
-                <div id="mb"></div>
-                <div id="pb">
-                    <div id="mind" class="mi">MODE</div>
-                    <div id="dc">DAY 1/31</div>
-                    <div id="stxt">Loading scenario...</div>
-                    <div id="br">
-                        <button id="by" class="db">YES</button>
-                        <button id="bn" class="db">NO</button>
-                    </div>
-                </div>
-                <div id="tw"><div id="tb"></div></div>
-            </div>
-
-            <div id="os" class="scr">
-                <h2 id="ot">GAME OVER</h2>
-                <p id="or"></p>
-                <button class="bp" onclick="location.reload()" style="margin-top:20px">RETRY</button>
-            </div>
-
-            <div id="js"><img id="jsimg" src="" alt="JUMPSCARE"></div>
-            <div id="dblk"><img src="https://i.ibb.co/v4m0Yv7/donkey.png" alt="MASCOT"></div>
-        </div>
-    </div>
-</section>
-
-<section class="lbs">
-    <div class="se">Global Rankings</div>
-    <h2 class="st">Bear Market Leaderboard</h2>
-    <table class="lbt">
-        <thead><tr><th>Rank</th><th>Founder</th><th>Mode</th><th>Survival</th></tr></thead>
-        <tbody id="lb-content">
-            <tr><td>1</td><td>Elon T.</td><td>Crisis</td><td>Day 31 (IPO)</td></tr>
-            <tr><td>2</td><td>Zuck B.</td><td>Crisis</td><td>Day 28 (Bankrupt)</td></tr>
-            <tr><td>3</td><td>TETR_Bot</td><td>CEO</td><td>Day 15 (Fired)</td></tr>
-        </tbody>
-    </table>
-</section>
-
-<section class="section">
-    <div class="se">Testimonials</div>
-    <h2 class="st">What founders say</h2>
-    <div class="tg">
-        <div class="tc">
-            <p class="tq">"I lasted 14 days then the donkey showed up. My whole team screamed."</p>
-            <div class="tnm">Founder @ Stealth AI</div>
-        </div>
-        <div class="tc">
-            <p class="tq">"More accurate than my MBA. Captures the sheer panic of a cash-crunch."</p>
-            <div class="tnm">Leandro Silva, SMM</div>
-        </div>
-        <div class="tc">
-            <p class="tq">"The jumpscares are actually educational. Don't make mistakes."</p>
-            <div class="tnm">CEO @ TETR</div>
-        </div>
-    </div>
-</section>
-
-<div id="ut">Message</div>
+<footer><span class="fc">© 2025 CEO.SIM — A Founder Simulation</span><span class="ftg">No VCs harmed. <span>Honor system payments.</span></span></footer>
 
 <script>
-// ═══ CORE ENGINE DATA RESTORED ═══ [cite: 73, 105, 139]
-const IMG = {
-    avatar: "https://i.ibb.co/YyYhCsy/ceo-av.png",
-    jumpscare: ["https://i.ibb.co/ZxbTzP9/scare1.jpg", "https://i.ibb.co/0YmZz6X/scare2.jpg"]
+// ═══ IMAGE PATHS (folder structure) ═══
+const IMG={
+  jumpscare:['jumpscare/1.png','jumpscare/2.png','jumpscare/3.png'],
+  blockade:['success_blockade/1.png','success_blockade/2.png','success_blockade/3.png'],
+  win:['question_right/1.png','question_right/2.png','question_right/3.png','question_right/4.png'],
+  lose:['question_wrong/2.png',],
+  avatar:'./donkey.png',
+  doodle:'./donkey.png'
 };
-
-const MODES = {
-    intern: { label:'Intern', color:'#3b82f6', metrics:[{key:'perf',label:'Performance'},{key:'energy',label:'Energy'}], timerFn:()=>10000 },
-    manager: { label:'Manager', color:'#8b5cf6', metrics:[{key:'morale',label:'Team Morale'},{key:'budget',label:'Budget'}], timerFn:()=>8000 },
-    ceo: { label:'CEO', color:'#f59e0b', metrics:[{key:'val',label:'Valuation'},{key:'mental',label:'Mental Health'}], timerFn:()=>6000 },
-    crisis: { label:'Crisis', color:'#ef4444', metrics:[{key:'survival',label:'Survival'}], timerFn:()=>4000 }
-};
-
-const FB = {
-    intern: [
-        {text:"Manager wants bug fixed before lunch. Push through?",yes:[12,-5],no:[-8,5]},
-        {text:"Team lunch but behind. Skip it?",yes:[12,-10],no:[-10,10]},
-        {text:"Bug in code review delays sprint. Flag it?",yes:[10,12],no:[-12,-8]}
-    ],
-    manager: [
-        {text:"Dev wants 4-day week. Agree?",yes:[20,-10],no:[-20,10]},
-        {text:"360 feedback — tell the hard truths?",yes:[15,12],no:[-10,-12]}
-    ],
-    ceo: [
-        {text:"Key dev leaving for Google. Counter-offer $200k?",yes:[15,-25],no:[-15,10]},
-        {text:"Investor wants to pivot to 'Web3 Toasters'. Agree?",yes:[30,-40],no:[-20,15]}
-    ],
-    crisis: [
-        {text:"Lay off 50% of staff to save the runway?",yes:[50],no:[-50]}
-    ]
-};
-
-// ═══ GAME STATE ═══
-let user = null, mode = 'intern', days = 1, mt = {}, ti = null, cur = null;
-
-// ═══ SOCIAL PROOF ENGINE (REAL-TIME DATA) ═══
-function updateSocialProof() {
-    // Fluctuate Live Users (Simulates actual traffic)
-    let live = 35 + Math.floor(Math.random() * 20);
-    document.getElementById('liveUsers').innerHTML = `<span class="dot"></span> ${live}`;
-    
-    // Increment Total Hits
-    let total = parseInt(localStorage.getItem('tetr_total_played')) || 14208;
-    document.getElementById('totalPlayed').textContent = total.toLocaleString();
-}
-setInterval(updateSocialProof, 3500);
-
-// ═══ CORE GAME LOGIC ═══
-function doSignIn() {
-    const n = document.getElementById('sin').value;
-    if(!n) return toast("Name required!");
-    user = {name: n};
-    
-    // Save to local storage for "Real Data" feel
-    let total = parseInt(localStorage.getItem('tetr_total_played')) || 14208;
-    localStorage.setItem('tetr_total_played', total + 1);
-    
-    document.getElementById('sis').classList.remove('active');
-    document.getElementById('ms').classList.add('active');
-    buildMC();
+function rndImg(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function setImages(){
+  document.getElementById('jsimg').src=rndImg(IMG.jumpscare);
+  document.getElementById('dbimg').src=rndImg(IMG.blockade);
+  document.querySelectorAll('.di').forEach(i=>{i.src=IMG.doodle;i.onerror=function(){this.style.display='none'}});
+  document.querySelectorAll('.di,#jsimg,#dbimg').forEach(i=>{i.onerror=function(){this.style.display='none'}});
 }
 
-function buildMC() {
-    const g = document.getElementById('mgrid');
-    g.innerHTML = Object.keys(MODES).map(m => `
-        <div class="mc" onclick="startGame('${m}')">
-            <div class="md" style="background:${MODES[m].color}"></div>
-            <div class="mn">${MODES[m].label}</div>
-            <div class="mds">Level ${m === 'intern' ? 1 : m === 'manager' ? 2 : 3}</div>
-        </div>
-    `).join('');
+// ═══ EBOOKS with PayPal ═══
+const EBOOKS={mood:{t:'The Burnout Blueprint',d:'Build sustainable energy at work.',icon:'&#128546;'},output:{t:'Deep Work Mastery',d:'Productivity for makers.',icon:'&#128187;'},rep:{t:'The Trust Playbook',d:'Rebuild reputation after setbacks.',icon:'&#129309;'},budget:{t:'The Bootstrap Bible',d:'Financial discipline for managers.',icon:'&#128176;'},product:{t:'Ship It Right',d:'Balance speed and quality.',icon:'&#128230;'},team:{t:'Leading Without Burning Out',d:'Sustainable high performance.',icon:'&#128101;'},cash:{t:'The Bootstrap Bible',d:'Cash management for startups.',icon:'&#128176;'},valuation:{t:'Bear Market Survival',d:'Navigate downturns and creditor pressure.',icon:'&#128200;'}};
+const PAYPAL_EBOOK='https://www.paypal.com/paypalme/LeandroSilvaSMM/2.49EUR';
+const PAYPAL_PASS='https://www.paypal.com/paypalme/LeandroSilvaSMM/0.99EUR';
+
+// ═══ SCENARIOS (30 per mode) ═══
+const FB={intern:[{text:"Manager wants bug fixed before lunch. Push through?",yes:[0,12,-5],no:[-8,-8,5]},{text:"Team lunch but behind. Skip it?",yes:[0,12,-10],no:[8,-10,10]},{text:"Cover for late colleague?",yes:[-5,0,10],no:[5,5,-12]},{text:"Bug in code review delays sprint. Flag it?",yes:[0,10,12],no:[5,-12,-8]},{text:"Optional HR training. Attend?",yes:[5,0,12],no:[0,8,-10]},{text:"Extra project, no support. Yes?",yes:[-10,10,8],no:[5,-8,-5]},{text:"Senior offers pair-program. Accept?",yes:[8,15,5],no:[0,-12,-5]},{text:"Disagree with assignment. Raise it?",yes:[-5,5,10],no:[5,-8,-8]},{text:"Deadline moved up. Work late?",yes:[-12,12,-5],no:[-5,-10,5]},{text:"Teammate's code breaks yours. Tell?",yes:[5,5,10],no:[0,-10,-8]},{text:"Write docs nobody reads?",yes:[0,8,12],no:[5,-5,-8]},{text:"Contradictory instructions. Ask?",yes:[-5,10,10],no:[5,-12,-5]},{text:"Junior needs code review. Help?",yes:[-8,0,12],no:[5,5,-8]},{text:"Colleague took credit. Speak up?",yes:[-8,0,15],no:[5,5,-10]},{text:"Shortcut — not proper. Use it?",yes:[0,15,-8],no:[0,-5,8]},{text:"Coworker job hunting. Keep secret?",yes:[0,0,12],no:[-5,0,-15]},{text:"Broke production. Admit?",yes:[-8,5,15],no:[5,-5,-12]},{text:"Present to team. Extra prep?",yes:[-8,10,12],no:[5,-5,-5]},{text:"Recruiter DMs you. Reply?",yes:[5,0,-10],no:[0,0,5]},{text:"Cut testing corners?",yes:[0,15,-12],no:[0,-5,8]},{text:"Lie on timesheet? Refuse?",yes:[0,0,15],no:[-5,-5,-15]},{text:"Stretch assignment. Accept?",yes:[-10,15,10],no:[5,-8,-5]},{text:"After-work drinks. Seniors there. Go?",yes:[-8,0,12],no:[8,0,-8]},{text:"Mentor struggling intern?",yes:[-10,5,15],no:[5,5,-8]},{text:"Skip-level visits. Mention struggles?",yes:[-5,0,12],no:[5,5,-5]},{text:"Duplicate tasks. Tell both managers?",yes:[-5,5,10],no:[5,-8,-8]},{text:"Boss praised wrong person. Correct?",yes:[-8,0,15],no:[5,5,-10]},{text:"All-hands over lunch. Stay?",yes:[-5,0,12],no:[5,0,-8]},{text:"Daily updates. Comply?",yes:[-5,-5,10],no:[5,5,-8]},{text:"Disagree with tech stack. Speak?",yes:[-5,10,8],no:[5,-8,-5]}],
+manager:[{text:"Dev wants 4-day week. Agree?",yes:[-8,-8,20,-5],no:[10,8,-20,-5]},{text:"Promote internal over external?",yes:[-8,10,18,-5],no:[10,-12,-15,5]},{text:"DB refactor — 3wk, 0 features?",yes:[-15,25,8,5],no:[18,-22,-5,-8]},{text:"360 feedback — truths?",yes:[0,5,12,15],no:[5,-5,-10,-12]},{text:"Star wants transfer. Let them?",yes:[0,0,10,15],no:[8,5,-20,-10]},{text:"Unlimited PTO?",yes:[-10,-5,22,10],no:[10,8,-12,-8]},{text:"$12k contractor?",yes:[-18,22,5,5],no:[12,-18,-8,-5]},{text:"Weekly 1:1s — 3hr extra?",yes:[-5,5,18,10],no:[8,-8,-12,-5]},{text:"Credit junior at all-hands?",yes:[0,0,15,18],no:[5,5,-12,-8]},{text:"New stack mid-quarter?",yes:[-12,18,15,-5],no:[10,-12,-10,-8]},{text:"Junior leads beyond exp?",yes:[-5,12,18,5],no:[8,-8,-12,0]},{text:"Kill status meeting?",yes:[0,12,15,5],no:[5,-10,-8,-5]},{text:"Team burned out. Pause?",yes:[-12,0,20,15],no:[10,-8,-5,-18]},{text:"Talented but late. PIP?",yes:[0,8,-5,-12],no:[5,-10,5,5]},{text:"$5k offsite for morale?",yes:[-12,0,18,15],no:[8,5,-10,-8]},{text:"Push back on deadline?",yes:[-8,5,5,15],no:[8,-10,-5,-12]},{text:"Open-source codebase?",yes:[0,12,15,-5],no:[5,-8,-8,5]},{text:"No-meeting Wednesday?",yes:[-5,15,12,8],no:[5,-8,-5,-5]},{text:"Remote abroad 1 month?",yes:[-5,-5,15,10],no:[5,5,-10,-8]},{text:"Promote internal to save $?",yes:[-5,8,15,12],no:[8,-10,-8,-10]},{text:"Top earner underperforming. Talk?",yes:[-5,8,5,-10],no:[5,-12,-5,5]},{text:"Underperformer must go?",yes:[0,12,-8,-15],no:[5,-10,5,5]},{text:"Demo unfinished features?",yes:[8,-12,8,-5],no:[-5,10,-8,5]},{text:"$8k agile coach?",yes:[-10,15,10,8],no:[8,-10,-5,-5]},{text:"Reorg for bottleneck?",yes:[-8,12,5,-10],no:[8,-10,-5,5]},{text:"Self-organise sprints?",yes:[0,8,15,10],no:[5,-5,-8,-5]},{text:"Conference for employee?",yes:[-8,5,15,10],no:[5,0,-8,-5]},{text:"Competitor leak info?",yes:[0,15,-15,0],no:[0,-5,10,0]},{text:"Public individual metrics?",yes:[0,12,-5,-15],no:[5,-8,5,10]},{text:"Tooling budget increase?",yes:[-10,15,8,12],no:[8,-12,-8,-5]}],
+ceo:[{text:"Competitor AI. Force weekend?",yes:[0,15,5,-25],no:[0,-10,-5,10]},{text:"Investor cash — fire cofounder?",yes:[30,0,-10,-30],no:[-10,0,10,15]},{text:"Pivot to AI — 6mo rebuild?",yes:[-25,20,10,-15],no:[10,-10,0,10]},{text:"Acquire competitor?",yes:[-30,10,20,-10],no:[10,-5,0,5]},{text:"All-in enterprise?",yes:[20,-10,5,-15],no:[-5,10,-5,10]},{text:"Down-round for runway?",yes:[25,-5,-20,0],no:[-15,5,10,0]},{text:"Launch 3 countries?",yes:[-20,10,20,-15],no:[10,-5,0,8]},{text:"COO — big equity?",yes:[-20,15,10,15],no:[10,-10,-5,-10]},{text:"Mandate RTO?",yes:[5,10,0,-35],no:[-5,-5,0,20]},{text:"Ignore tech debt?",yes:[20,-25,0,-10],no:[-15,20,0,10]},{text:"Release with bugs?",yes:[15,-20,-15,5],no:[-10,10,10,-5]},{text:"Cut support for runway?",yes:[20,0,-25,-10],no:[-10,0,15,5]},{text:"Partnership limits VCs?",yes:[20,10,-10,0],no:[-5,-5,5,5]},{text:"Customer churn threat. Deal?",yes:[-10,0,20,0],no:[5,0,-25,5]},{text:"PR firm $10k/mo?",yes:[-15,0,25,0],no:[8,0,-12,0]},{text:"Equity to top 5?",yes:[-15,10,10,20],no:[10,-8,-5,-18]},{text:"Kill 20%rev/80%tickets?",yes:[10,-15,5,12],no:[-5,5,-5,-8]},{text:"Venture debt 12%?",yes:[15,-5,-5,0],no:[-8,5,5,0]},{text:"Respond to article?",yes:[-5,0,12,-8],no:[5,0,-15,5]},{text:"Stack ranking?",yes:[8,8,-10,-20],no:[-5,-5,5,12]},{text:"Full remote?",yes:[15,-5,5,15],no:[-8,5,-5,-8]},{text:"Poach CTO?",yes:[-20,20,5,8],no:[8,-12,0,-5]},{text:"Freemium tier?",yes:[-10,10,15,-5],no:[8,-8,-5,5]},{text:"$40k patent?",yes:[-15,5,15,0],no:[8,0,-8,0]},{text:"Move HQ?",yes:[15,-5,-8,-12],no:[-8,5,5,5]},{text:"Celebrity ambassador?",yes:[-10,0,25,-5],no:[5,0,-10,0]},{text:"Hiring freeze?",yes:[15,-8,0,-12],no:[-10,5,5,8]},{text:"Fire VP Sales?",yes:[5,5,-8,-15],no:[-5,-8,5,8]},{text:"IPO early?",yes:[20,-10,-5,-15],no:[-5,5,5,8]},{text:"20% time?",yes:[-8,15,10,18],no:[8,-8,-5,-10]}],
+crisis:[{text:"Auditors — forensic team?",yes:-800000,no:-1500000},{text:"Whistleblower settlement?",yes:-600000,no:-2000000},{text:"Client 40% discount?",yes:-500000,no:-1200000},{text:"Board fly-in or video?",yes:-300000,no:-100000},{text:"Creditor repayment?",yes:-400000,no:-2000000},{text:"Bridge 25% for payroll?",yes:-700000,no:-1500000},{text:"Layoff 20%?",yes:-200000,no:-900000},{text:"PULLBACK: PE board seat?",yes:400000,no:-1000000},{text:"PULLBACK: Patent deal?",yes:800000,no:-200000},{text:"Sell product line?",yes:600000,no:-1200000},{text:"White-label license?",yes:500000,no:-400000},{text:"Public difficulties?",yes:-200000,no:-1000000},{text:"Cut SaaS?",yes:-100000,no:-300000},{text:"Revenue recognition?",yes:-300000,no:-800000},{text:"Buyer — banker?",yes:300000,no:-600000},{text:"Predatory 40% APR?",yes:-500000,no:-1200000},{text:"PULLBACK: Sovereign fund?",yes:600000,no:-800000},{text:"Sell IP $1M?",yes:700000,no:-500000},{text:"Debt-equity swap?",yes:-100000,no:-800000},{text:"All on sales?",yes:-300000,no:-700000},{text:"PULLBACK: Buy contracts?",yes:500000,no:-200000},{text:"Close intl offices?",yes:-200000,no:-600000},{text:"3yr prepaid lock?",yes:400000,no:-300000},{text:"Exec salary cut 50%?",yes:-100000,no:-500000},{text:"Sell HQ?",yes:300000,no:-200000},{text:"Gov bailout?",yes:600000,no:-1000000},{text:"Turnaround CEO?",yes:-200000,no:-800000},{text:"Supplier terms?",yes:-100000,no:-400000},{text:"PULLBACK: Hedge bridge?",yes:500000,no:-700000},{text:"White knight?",yes:-100000,no:-800000}]};
+
+const MODES={intern:{color:'#22c55e',label:'Intern',timerFn:d=>Math.max(9000,12000-Math.floor(d/4)*500),metrics:[{key:'mood',label:'Mood',color:'#4ade80',start:55},{key:'output',label:'Output',color:'#60a5fa',start:55},{key:'rep',label:'Rep',color:'#facc15',start:55}],promoTitle:'You Got Hired!',promoSub:'31 days survived. Time to manage a team.',promoIcon:'&#128188;',next:'manager'},
+manager:{color:'#3b82f6',label:'Manager',timerFn:d=>Math.max(6000,10000-Math.floor(d/3)*500),metrics:[{key:'budget',label:'Budget',color:'#4ade80',start:55},{key:'product',label:'Product',color:'#60a5fa',start:55},{key:'team',label:'Team',color:'#f472b6',start:55},{key:'rep',label:'Rep',color:'#facc15',start:55}],promoTitle:'You\'re a Founder!',promoSub:'31 days managed. The boardroom awaits.',promoIcon:'&#127942;',next:'ceo'},
+ceo:{color:'#eab308',label:'CEO',timerFn:d=>Math.max(5000,8000-Math.floor(d/3)*500),metrics:[{key:'cash',label:'Cash',color:'#4ade80',start:50},{key:'product',label:'Product',color:'#60a5fa',start:50},{key:'rep',label:'Rep',color:'#facc15',start:50},{key:'team',label:'Team',color:'#f472b6',start:50}],promoTitle:'Bear Market Unlocked!',promoSub:'31 CEO days. The final challenge awaits.',promoIcon:'&#128293;',next:'crisis'},
+crisis:{color:'#ef4444',label:'Bear Market',timerFn:d=>d>=10?5000:6000,metrics:[]}};
+
+const SHOP_ITEMS=[{id:'cash_b',name:'+10 Cash',desc:'Extra runway.',cost:100,key:'cash',val:10,icon:'&#128176;'},{id:'team_b',name:'+10 Team',desc:'Pre-motivated.',cost:100,key:'team',val:10,icon:'&#128101;'},{id:'product_b',name:'+10 Product',desc:'Quality head start.',cost:100,key:'product',val:10,icon:'&#128187;'},{id:'rep_b',name:'+10 Rep',desc:'Good press.',cost:100,key:'rep',val:10,icon:'&#127775;'},{id:'mood_b',name:'+10 Mood',desc:'Extra coffee.',cost:80,key:'mood',val:10,icon:'&#9749;'},{id:'budget_b',name:'+10 Budget',desc:'Emergency fund.',cost:80,key:'budget',val:10,icon:'&#128181;'}];
+
+// ═══ STATE ═══
+let mode='intern',days=0,cur=null,ti=null,mt={},val=0,revUsed=false,lostKey='',a80=0;
+let credits=500,bought=[],bonuses={};
+const SV=5000000,MV=10000000;
+const pools={intern:null,manager:null,ceo:null,crisis:null};
+const decks={intern:{a:[],i:0},manager:{a:[],i:0},ceo:{a:[],i:0},crisis:{a:[],i:0}};
+let user=null,selAvF='',selAvS='';
+let pvCallback=null;
+const JUMPSCARE_CHANCE=0.08;
+
+// ═══ PERSISTENCE ═══
+function saveGS(){try{localStorage.setItem('ceo_gs',JSON.stringify({mode,days,mt,val,revUsed,a80,bonuses}))}catch(e){}}
+function loadGS(){try{const s=localStorage.getItem('ceo_gs');return s?JSON.parse(s):null}catch(e){return null}}
+function clearGS(){try{localStorage.removeItem('ceo_gs')}catch(e){}}
+function getP(){try{return JSON.parse(localStorage.getItem('ceo_p')||'{}')}catch(e){return{}}}
+function saveP(p){try{localStorage.setItem('ceo_p',JSON.stringify(p))}catch(e){}}
+function loadU(){try{const d=localStorage.getItem('ceo_u');if(d)user=JSON.parse(d)}catch(e){}}
+function saveU(){try{localStorage.setItem('ceo_u',JSON.stringify(user))}catch(e){}}
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initDeck(m){decks[m]={a:shuffle(pools[m]||FB[m]),i:0}}
+function draw(m){const d=decks[m];if(d.i>=d.a.length){d.a=shuffle(d.a);d.i=0}return d.a[d.i++]}
+async function tryLoad(m){try{const r=await fetch(`./scenarios/${m}.json`,{cache:'no-cache'});if(!r.ok)throw 0;const d=await r.json();if(Array.isArray(d)&&d.length)pools[m]=d}catch(e){}}
+Promise.all(['intern','manager','ceo','crisis'].map(tryLoad));
+
+function clamp(v){return Math.max(0,Math.min(100,Math.round(v)))}
+function fmtV(n){return '$'+Math.round(n).toLocaleString()}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// ═══ AVATAR ═══
+function buildAvPicker(){
+  const g=document.getElementById('avg');
+  const f=[{c:'',l:'Original'},{c:'av-intern',l:'Intern'},{c:'av-manager',l:'Manager'},{c:'av-ceo',l:'CEO'},{c:'av-crisis',l:'Chaos'}];
+  g.innerHTML=f.map((x,i)=>`<div class="avo ${i===0?'sel':''}" onclick="pickAv(this,'${x.c}')"><img src="${IMG.avatar}" class="${x.c}" onerror="this.parentElement.style.display='none'" alt="${x.l}"/><div class="avo-label">${x.l}</div></div>`).join('')+`<button type="button" class="aub" onclick="document.getElementById('sif').click()">Upload</button><input type="file" id="sif" accept="image/*" style="display:none" onchange="handleUp(this)"/>`;
+  selAvS=IMG.avatar;selAvF='';
+}
+function pickAv(el,c){document.querySelectorAll('.avo').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');selAvF=c;selAvS=IMG.avatar}
+function handleUp(i){if(!i.files||!i.files[0])return;const r=new FileReader();r.onload=e=>{selAvS=e.target.result;selAvF='';document.querySelectorAll('.avo').forEach(o=>o.classList.remove('sel'))};r.readAsDataURL(i.files[0])}
+function doSignIn(){
+  const n=document.getElementById('sin').value.trim(),e=document.getElementById('sieml').value.trim(),err=document.getElementById('sierr');
+  if(!n){err.textContent='Enter your name.';return}if(!e||!e.includes('@')){err.textContent='Enter a valid email.';return}
+  err.textContent='';user={name:n,email:e,avSrc:selAvS,avF:selAvF};saveU();updateNav();toMode();
+}
+function updateNav(){
+  const a=document.getElementById('nua');if(!user){a.innerHTML='';return}
+  a.innerHTML=`<div class="nu"><img class="na ${user.avF||''}" src="${user.avSrc}" onerror="this.style.display='none'"/><span class="nn">${esc(user.name)}</span></div>`;
 }
 
-function startGame(m) {
-    mode = m; days = 1; mt = {};
-    MODES[mode].metrics.forEach(met => mt[met.key] = 100);
-    document.getElementById('ms').classList.remove('active');
-    document.getElementById('ps').classList.add('active');
-    document.getElementById('mind').textContent = MODES[mode].label;
-    document.getElementById('mind').style.color = MODES[mode].color;
-    nextTurn();
+// ═══ MODE CARDS ═══
+function buildMC(){
+  const p=getP(),g=document.getElementById('mgrid');
+  const cards=[
+    {m:'intern',locked:false,done:p.intern},
+    {m:'manager',locked:false,done:p.manager},
+    {m:'ceo',locked:false,done:p.ceo},
+    {m:'crisis',locked:!p.bearMarketUnlocked,done:false}
+  ];
+  g.innerHTML=cards.map(c=>{
+    const cfg=MODES[c.m];
+    const lockHtml=c.m==='crisis'&&c.locked?`<div class="badge badge-lock">&#128274; Locked</div>`:'';
+    const doneHtml=c.done?`<div class="badge badge-done">Done</div>`:'';
+    return `<div class="mc ${c.locked?'locked':''}" style="--mcc:${cfg.color}" onclick="selectMode('${c.m}')">
+      ${lockHtml}${doneHtml}
+      <div class="md" style="background:${cfg.color}"></div>
+      <div class="mn" style="color:${cfg.color}">${cfg.label}</div>
+      <div class="mds">${c.m==='crisis'?'One metric. Leaderboard eligible.':'Survive 31 days.'}</div>
+      <div class="mt" style="color:${cfg.color}">${c.m==='intern'?'12s→9s':c.m==='manager'?'10s→6s':c.m==='ceo'?'8s→5s':'6s→5s'}</div>
+      <div class="mms">${c.m==='crisis'?'Goal: Survive — Leaderboard':'Goal: 31 days'}</div>
+    </div>`}).join('');
+}
+function selectMode(m){if(m==='crisis'&&!getP().bearMarketUnlocked)return;mode=m;showShop()}
+
+// ═══ UNLOCK MECHANISMS ═══
+function buyEP(){
+  window.open(PAYPAL_PASS,'_blank');
+  pvCallback=()=>{const p=getP();p.bearMarketUnlocked=true;saveP(p);toast('Executive Pass — Bear Market unlocked!');buildMC()};
+  document.getElementById('pvt').textContent='Waiting for Executive Pass payment…';
+  document.getElementById('pvd').textContent='Complete the PayPal payment of 0.99€, then click Verify.';
+  document.getElementById('pvm').classList.add('active');
+}
+function redeemCode(){
+  const code=document.getElementById('redeem-input').value.trim().toUpperCase();
+  if(code==='DONKEY2026'){const p=getP();p.bearMarketUnlocked=true;saveP(p);toast('Code accepted — Bear Market unlocked!');buildMC();document.getElementById('redeem-input').value=''}
+  else{toast('Invalid code. Try again.')}
+}
+function verifyPayment(){document.getElementById('pvm').classList.remove('active');if(pvCallback){pvCallback();pvCallback=null}}
+function closePV(){document.getElementById('pvm').classList.remove('active');pvCallback=null}
+
+// ═══ SCREENS ═══
+const SCREENS=['sis','mss','shs','ps','os','prs','sus','fs'];
+function show(id){SCREENS.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active')}
+function toMode(){clearInterval(ti);clearGS();buildMC();show('mss')}
+
+// ═══ SHOP ═══
+function showShop(){
+  credits=500;bought=[];bonuses={};
+  if(mode==='crisis'){startGame();return}
+  const rel=SHOP_ITEMS.filter(it=>MODES[mode].metrics.some(m=>m.key===it.key));
+  if(!rel.length){startGame();return}
+  document.getElementById('shg').innerHTML=rel.map(it=>`<div class="shi" id="si-${it.id}" onclick="buyI('${it.id}')"><div class="shic">${it.icon}</div><div class="shin">${it.name}</div><div class="shid">${it.desc}</div><div class="ship">${it.cost} cr</div></div>`).join('');
+  document.getElementById('scr').textContent=credits;show('shs');
+}
+function buyI(id){if(bought.includes(id))return;const it=SHOP_ITEMS.find(x=>x.id===id);if(!it||credits<it.cost)return;credits-=it.cost;bought.push(id);bonuses[it.key]=(bonuses[it.key]||0)+it.val;document.getElementById('scr').textContent=credits;document.getElementById('si-'+id).classList.add('bought')}
+function startFromShop(){startGame()}
+
+// ═══ GAME ═══
+function buildM(){const b=document.getElementById('mb');b.innerHTML='';if(mode==='crisis'){b.style.display='none';document.getElementById('vb').style.display='block';return}document.getElementById('vb').style.display='none';b.style.display='grid';b.style.gridTemplateColumns=`repeat(${MODES[mode].metrics.length},1fr)`;MODES[mode].metrics.forEach(m=>{const s=Math.min(100,m.start+(bonuses[m.key]||0));mt[m.key]=s;b.innerHTML+=`<div class="met"><div class="mh"><span class="ml">${m.label}</span><span class="mv" id="v-${m.key}">${clamp(s)}/100</span></div><div class="mbg"><div class="mf" id="f-${m.key}" style="width:${clamp(s)}%;background:${m.color}"></div></div></div>`})}
+function updateB(){MODES[mode].metrics.forEach(m=>{const v=clamp(mt[m.key]),f=document.getElementById('f-'+m.key),vl=document.getElementById('v-'+m.key);if(f)f.style.width=v+'%';if(vl)vl.textContent=v+'/100'});document.getElementById('dn').textContent=days}
+function updateV(){val=Math.max(0,val);document.getElementById('va').textContent=fmtV(val);document.getElementById('vbf').style.width=Math.min(100,(val/MV)*100)+'%';document.getElementById('dn').textContent=days;const pr=val-SV;const l=document.getElementById('vpl');if(pr>0){l.textContent='▲ '+fmtV(pr);l.style.color='#4ade80'}else if(pr<0){l.textContent='▼ '+fmtV(Math.abs(pr));l.style.color='#f87171'}else l.textContent=''}
+
+function startGame(){
+  days=0;cur=null;revUsed=false;lostKey='';a80=0;initDeck(mode);
+  const c=MODES[mode];document.getElementById('tb').style.background=c.color;
+  const ind=document.getElementById('mind');ind.textContent=c.label;ind.style.cssText=`font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:8px;background:${c.color}22;color:${c.color};border:1px solid ${c.color}44`;
+  document.getElementById('dgl').textContent=mode==='crisis'?' (endless)':' / 31';
+  buildM();if(mode==='crisis'){val=SV;document.getElementById('bsl').style.display='none';updateV()}
+  show('ps');nextS();
 }
 
-function nextTurn() {
-    if(days > 31) return endGame("SUCCESS! Career level complete.");
-    
-    cur = FB[mode][Math.floor(Math.random() * FB[mode].length)];
-    document.getElementById('stxt').textContent = cur.text;
-    document.getElementById('dc').textContent = `DAY ${days}/31`;
-    updateBars();
-    startTi();
+function nextS(){
+  days++;document.getElementById('dn').textContent=days;saveGS();
+  if(mode!=='crisis'&&days>31){triggerPromo();return}
+  if(mode==='crisis'&&days>15)document.getElementById('bsl').style.display='inline-block';
+  // Check blockade: all metrics >80 for 5 consecutive turns
+  if(mode!=='crisis'){const allH=MODES[mode].metrics.every(m=>mt[m.key]>80);a80=allH?a80+1:0}
+  cur=draw(mode);document.getElementById('stxt').textContent=cur.text;
+  // Success Blockade
+  if(a80>=5){
+    document.getElementById('dblk').classList.add('active');
+    document.getElementById('stxt').style.visibility='hidden';
+    document.getElementById('dbimg').src=rndImg(IMG.blockade);
+  }
+  // Random jumpscare (low chance, CEO/Crisis only)
+  if((mode==='ceo'||mode==='crisis')&&Math.random()<JUMPSCARE_CHANCE)setTimeout(()=>triggerJS(),500+Math.random()*2000);
+  startTi();
+}
+function startTi(){
+  const dur=MODES[mode].timerFn(days);let el=0;clearInterval(ti);document.getElementById('tb').style.width='100%';
+  ti=setInterval(()=>{el+=50;document.getElementById('tb').style.width=Math.max(0,100-(el/dur*100))+'%';
+    // Remove blockade at 3s remaining
+    if((dur-el)/1000<=3){document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible'}
+    if(el>=dur){clearInterval(ti);shk();applyTO()}
+  },50);
+}
+const wrap=document.getElementById('gw');
+function shk(){wrap.classList.remove('shake');void wrap.offsetWidth;wrap.classList.add('shake')}
+function triggerJS(){
+  const js=document.getElementById('js');document.getElementById('jsimg').src=rndImg(IMG.jumpscare);
+  js.classList.add('active');wrap.classList.remove('mshk');void wrap.offsetWidth;wrap.classList.add('mshk');
+  setTimeout(()=>{js.classList.remove('active');wrap.classList.remove('mshk')},500);
 }
 
-function updateBars() {
-    const mb = document.getElementById('mb');
-    mb.innerHTML = MODES[mode].metrics.map(m => `
-        <div class="met">
-            <div class="ml">${m.label}</div>
-            <div class="mbg"><div class="mf" style="width:${mt[m.key]}%; background:${MODES[mode].color}"></div></div>
-        </div>
-    `).join('');
+function decide(ch){
+  if(!cur)return;clearInterval(ti);document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible';
+  const arr=ch==='y'?cur.yes:cur.no;
+  const neg=mode==='crisis'?(typeof arr==='number'&&arr<0):Array.isArray(arr)&&arr.some(v=>v<=-10);
+  if((mode==='ceo'||mode==='crisis')&&neg)triggerJS();
+  if(mode==='crisis')applyVd(arr);else applyId(arr);
+}
+function applyTO(){document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible';a80=0;if(mode==='crisis')applyVd(-500000);else applyId(MODES[mode].metrics.map(()=>-10))}
+function applyId(a){if(a.some(v=>v<=-15))shk();MODES[mode].metrics.forEach((m,i)=>{mt[m.key]=(mt[m.key]||0)+a[i]});updateB();if(!checkO())setTimeout(nextS,350)}
+function applyVd(d){val+=d;updateV();if(val<=0){rFlash(()=>gameOver('valuation','Valuation hit zero.'));return}setTimeout(nextS,350)}
+function checkO(){if(mode==='crisis')return false;for(const m of MODES[mode].metrics){if(mt[m.key]<=0){lostKey=m.key;const nm=Object.fromEntries(MODES[mode].metrics.map(x=>[x.key,x.label]));rFlash(()=>gameOver(m.key,`${nm[m.key]} hit zero.`,nm));return true}}return false}
+function rFlash(cb){const e=document.getElementById('df');e.classList.remove('flashing');void e.offsetWidth;e.classList.add('flashing');setTimeout(()=>{e.classList.remove('flashing');cb()},950)}
+
+function triggerPromo(){
+  clearInterval(ti);clearGS();const c=MODES[mode],p=getP();p[mode]=true;
+  if(mode==='ceo'){p.bearMarketUnlocked=true}
+  saveP(p);
+  document.getElementById('pri').innerHTML=c.promoIcon;document.getElementById('pt2').textContent=c.promoTitle;document.getElementById('pst').textContent=c.promoSub;
+  // Show win image
+  const wi=document.getElementById('win-img');wi.src=rndImg(IMG.win);wi.style.display='block';wi.onerror=function(){this.style.display='none'};
+  toast(c.promoTitle);show('prs');
+}
+function doSell(){
+  clearInterval(ti);clearGS();const pr=val-SV;
+  document.getElementById('suv').textContent=fmtV(val);
+  const pb=document.getElementById('supb');pb.textContent=pr>=0?'Profit: +'+fmtV(pr):'Loss: -'+fmtV(Math.abs(pr));pb.className='prb '+(pr>=0?'prp':'prn');
+  document.getElementById('sut').textContent=pr>0?'Perfectly timed.':'Sold before zero.';
+  const swi=document.getElementById('sell-win-img');swi.src=rndImg(IMG.win);swi.style.display='block';swi.onerror=function(){this.style.display='none'};
+  show('sus');
 }
 
-function startTi() {
-    let el = 0; let dur = MODES[mode].timerFn();
-    clearInterval(ti);
-    ti = setInterval(() => {
-        el += 50;
-        let pct = 100 - (el/dur*100);
-        document.getElementById('tb').style.width = pct + '%';
-        if(pct < 30) document.getElementById('dblk').classList.add('active');
-        if(el >= dur) { clearInterval(ti); apply([ -15, -15 ]); }
-    }, 50);
+// ═══ GAME OVER ═══
+function gameOver(lost,reason,nm={}){
+  clearInterval(ti);clearGS();lostKey=lost;
+  document.getElementById('or').textContent=reason;document.getElementById('dsv').textContent=days;
+  // Show lose image
+  const gi=document.getElementById('go-img');gi.src=rndImg(IMG.lose);gi.style.display='block';gi.onerror=function(){this.style.display='none'};
+  // Review
+  if(mode==='crisis'){document.getElementById('fbd').textContent=days;document.getElementById('fbm').textContent='Valuation';document.getElementById('fbb').textContent='—';document.getElementById('fbg').textContent=days>=20?'B':days>=10?'C':'D';document.getElementById('fbt').innerHTML='<strong>Bear market won.</strong> Exploit pullback scenarios faster.';if(user)autoSaveLB()}
+  else{const ks=MODES[mode].metrics.map(m=>m.key),best=ks.reduce((a,b)=>mt[a]>mt[b]?a:b);const gr=days>=31?'S':days>=25?'A':days>=15?'B':days>=8?'C':'D';const cp={mood:'<strong>Burnout.</strong>',output:'<strong>Output collapsed.</strong>',rep:'<strong>Reputation destroyed.</strong>',budget:'<strong>Budget blown.</strong>',product:'<strong>Product eroded.</strong>',team:'<strong>Team burned out.</strong>',cash:'<strong>Cash ran out.</strong>'};document.getElementById('fbd').textContent=days;document.getElementById('fbm').textContent=nm[lost]||lost;document.getElementById('fbb').textContent=nm[best]||best;document.getElementById('fbg').textContent=gr;document.getElementById('fbt').innerHTML=(cp[lost]||'')+(days>=20?' Strong run.':'')}
+  // Build buttons
+  const btns=document.getElementById('over-btns');
+  let html='';
+  if(mode!=='crisis'&&!revUsed)html+=`<button class="ob ob-gr" onclick="showAdModal()">Watch Ad to Continue</button>`;
+  if(EBOOKS[lost])html+=`<button class="ob ob-a" onclick="showEbookModal()">Founder E-Book Bundle</button>`;
+  html+=`<button class="ob ob-g" onclick="toMode()">Change Mode</button>`;
+  btns.innerHTML=html;
+  show('os');
 }
 
-document.getElementById('by').onclick = () => { clearInterval(ti); apply(cur.yes); };
-document.getElementById('bn').onclick = () => { clearInterval(ti); apply(cur.no); };
+// ═══ EBOOK MODAL ═══
+function showEbookModal(){
+  const b=EBOOKS[lostKey];if(!b)return;
+  document.getElementById('ebi').innerHTML=b.icon;document.getElementById('ebt').textContent=b.t;document.getElementById('ebd').textContent=b.d;
+  const btn=document.getElementById('ebb');
+  btn.textContent=`Buy "${b.t}" — 2.49€`;
+  btn.onclick=function(e){e.preventDefault();window.open(PAYPAL_EBOOK,'_blank');pvCallback=()=>{closeEb();toast('Thank you! Download link ready.');};document.getElementById('ebm').classList.remove('active');document.getElementById('pvt').textContent='Waiting for E-Book payment…';document.getElementById('pvd').textContent='Complete the PayPal payment of 2.49€, then click Verify.';document.getElementById('pvm').classList.add('active')};
+  document.getElementById('ebm').classList.add('active');
+}
+function closeEb(){document.getElementById('ebm').classList.remove('active')}
 
-function apply(eff) {
-    document.getElementById('dblk').classList.remove('active');
-    MODES[mode].metrics.forEach((m, i) => mt[m.key] = Math.max(0, mt[m.key] + eff[i]));
-    
-    // Jump-scare logic
-    if(eff.some(v => v < -20)) triggerJS();
-
-    if(MODES[mode].metrics.some(m => mt[m.key] <= 0)) return endGame("FAILURE. You were let go.");
-    days++;
-    setTimeout(nextTurn, 400);
+// ═══ AD MODAL ═══
+function showAdModal(){
+  document.getElementById('adm').classList.add('active');
+  const t=document.getElementById('adt'),b=document.getElementById('adb'),s=document.getElementById('ads'),c=document.getElementById('adc');
+  c.disabled=true;let rem=15;t.textContent=rem;b.style.width='0%';s.textContent='Loading ad…';
+  setTimeout(()=>{s.textContent='Ad playing…'},2000);
+  const iv=setInterval(()=>{rem--;t.textContent=rem;b.style.width=((15-rem)/15*100)+'%';if(rem<=3)s.textContent='Almost done…';if(rem<=0){clearInterval(iv);s.textContent='Ad complete!';c.disabled=false;revUsed=true}},1000);
+}
+function finishRevive(){
+  document.getElementById('adm').classList.remove('active');
+  if(mode!=='crisis'){MODES[mode].metrics.forEach(m=>{mt[m.key]=Math.max(mt[m.key],50)});updateB()}
+  show('ps');setTimeout(nextS,300);
 }
 
-function triggerJS() {
-    const js = document.getElementById('js');
-    document.getElementById('jsimg').src = IMG.jumpscare[Math.floor(Math.random()*2)];
-    js.classList.add('active');
-    setTimeout(() => js.classList.remove('active'), 500);
-}
+// ═══ QUIT ═══
+function promptQ(){clearInterval(ti);document.getElementById('qc').classList.add('show')}
+function cancelQ(){document.getElementById('qc').classList.remove('show');startTi()}
+function doQuit(){document.getElementById('qc').classList.remove('show');clearGS();document.getElementById('fnt').textContent=`You handed in your ${days}-day notice as ${MODES[mode].label}.`;show('fs')}
 
-function endGame(msg) {
-    document.getElementById('ps').classList.remove('active');
-    document.getElementById('os').classList.add('active');
-    document.getElementById('ot').textContent = msg;
-    document.getElementById('or').textContent = `Final Status: Day ${days}`;
-}
+// ═══ LEADERBOARD (Bear Market only) ═══
+async function autoSaveLB(){if(!user)return;try{await window.storage.set('lb:'+Date.now()+':'+Math.random().toString(36).slice(2,6),JSON.stringify({name:user.name,avSrc:user.avSrc,avF:user.avF||'',days,mode:'crisis',date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})}),true);loadLB()}catch(e){}}
+async function loadLB(){try{const r=await window.storage.list('lb:'),ks=(r.keys||[]),es=await Promise.all(ks.map(async k=>{try{const r2=await window.storage.get(k,true);return r2?JSON.parse(r2.value):null}catch(e){return null}}));renderLB(es.filter(e=>e&&e.mode==='crisis').sort((a,b)=>b.days-a.days).slice(0,15))}catch(e){renderLB([])}}
+function renderLB(es){const c=document.getElementById('lbc');if(!es.length){c.innerHTML='<div class="lem">No Bear Market scores yet.</div>';return}c.innerHTML=`<table class="lbt"><thead><tr><th>Rank</th><th>Founder</th><th>Days</th><th>Date</th></tr></thead><tbody>${es.map((e,i)=>{const av=e.avSrc?`<img class="la ${e.avF||''}" src="${e.avSrc}" onerror="this.style.display='none'"/>`:`<div style="width:22px;height:22px;border-radius:50%;background:var(--s3);display:inline-flex;align-items:center;justify-content:center;font-size:.4rem;font-weight:700;color:var(--t3)">${(e.name||'?').charAt(0)}</div>`;return`<tr><td style="font-weight:800;color:${i<3?['#f59e0b','#a3a3a3','#cd7c3f'][i]:'var(--t3)'}">${i+1}</td><td><div class="lnc">${av}<span class="ln">${esc(e.name)}</span></div></td><td style="font-weight:700;color:#f87171">${e.days}</td><td style="color:var(--t3);font-size:.7rem">${e.date||''}</td></tr>`}).join('')}</tbody></table>`}
+
+// ═══ ADMIN CSV EXPORT (Ctrl+Shift+D) ═══
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.shiftKey&&e.key==='D'){
+    e.preventDefault();
+    if(!user){toast('No user data found.');return}
+    const csv='Name,Email\n'+`"${user.name}","${user.email}"`;
+    const blob=new Blob([csv],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='ceo_sim_users.csv';a.click();
+    URL.revokeObjectURL(url);toast('CSV exported.');
+  }
+});
+
+// ═══ KEYBOARD ═══
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('ps').classList.contains('active'))return;
+  if(document.getElementById('qc').classList.contains('show'))return;
+  if(document.querySelector('.modal.active'))return;
+  if(e.key==='y'||e.key==='Y')decide('y');
+  else if(e.key==='n'||e.key==='N')decide('n');
+});
+document.getElementById('by').addEventListener('click',()=>decide('y'));
+document.getElementById('bn').addEventListener('click',()=>decide('n'));
 
 function toast(m){const t=document.getElementById('ut');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
 function scrollTo_(){document.getElementById('ga').scrollIntoView({behavior:'smooth'})}
 
-updateSocialProof();
+// ═══ INIT ═══
+loadU();setImages();buildAvPicker();
+if(user){updateNav();const gs=loadGS();if(gs&&gs.days>0){buildMC();mode=gs.mode;days=gs.days;mt=gs.mt;val=gs.val;revUsed=gs.revUsed;a80=gs.a80;bonuses=gs.bonuses||{};initDeck(mode);const c=MODES[mode];document.getElementById('tb').style.background=c.color;const ind=document.getElementById('mind');ind.textContent=c.label;ind.style.cssText=`font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:8px;background:${c.color}22;color:${c.color};border:1px solid ${c.color}44`;document.getElementById('dgl').textContent=mode==='crisis'?' (endless)':' / 31';buildM();if(mode==='crisis'){document.getElementById('bsl').style.display=days>15?'inline-block':'none';updateV()}else{Object.keys(mt).forEach(k=>{const el=document.getElementById('f-'+k);if(el)el.style.width=clamp(mt[k])+'%';const vl=document.getElementById('v-'+k);if(vl)vl.textContent=clamp(mt[k])+'/100'})}show('ps');nextS()}else{buildMC();show('mss')}}
+else show('sis');
+loadLB();
 </script>
 </body>
 </html>
