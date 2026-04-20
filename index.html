@@ -275,15 +275,336 @@ footer{border-top:1px solid var(--border);padding:20px 48px;display:flex;justify
     </div>
   </div>
 
-  <div id="os" class="scr"></div>
+  <div id="os" class="scr">
+    <div style="margin-bottom:10px"><div id="ot">Game Over</div><p id="or"></p></div>
+    <img id="go-img" class="go-img" alt="" style="display:none"/>
+    <div class="od"><strong id="dsv">0</strong> days survived</div>
+    <div class="fb"><div class="ft">Performance Review</div><div class="fg"><div class="fs"><div class="fsl">Days</div><div class="fsv" id="fbd">0</div></div><div class="fs"><div class="fsl">Collapsed</div><div class="fsv" id="fbm">—</div></div><div class="fs"><div class="fsl">Strongest</div><div class="fsv" id="fbb">—</div></div><div class="fs"><div class="fsl">Grade</div><div class="fsv" id="fbg">—</div></div></div><div class="ftext" id="fbt"></div></div>
+    <div class="obs" id="over-btns"></div>
+  </div>
+
+  <div id="prs" class="scr"><div class="pi" id="pri">&#127881;</div><img id="win-img" class="promo-img" alt="" style="display:none"/><div id="pt2">Promoted!</div><p id="pst" style="font-size:.88rem;color:var(--t2);margin-bottom:20px;line-height:1.65;max-width:360px"></p><button class="pbtn" onclick="toMode()">Continue</button></div>
+  <div id="sus" class="scr"><div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--al);margin-bottom:8px">Successful Exit</div><h2>You Sold the Company</h2><img id="sell-win-img" class="win-img" alt="" style="display:none"/><div class="sv" id="suv">$0</div><div id="supb" class="prb prp"></div><p class="sst" id="sut"></p><button class="ob ob-g" onclick="toMode()">Play Again</button></div>
+  <div id="fs" class="scr"><div style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">Voluntary Exit</div><h2>You handed in your notice.</h2><p class="fn" id="fnt"></p><div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><button class="ob ob-a" onclick="startGame()">Try Again</button><button class="ob ob-g" onclick="toMode()">Change Mode</button></div></div>
+</div>
+</section></div>
+
+<div style="background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)"><section class="lbs"><div class="se">Global Rankings</div><h2 class="st" style="margin-bottom:5px">Bear Market Leaderboard</h2><p style="font-size:.82rem;color:var(--t3)">Only Crisis mode scores qualify.</p><div id="lbc"><div class="lem">Loading…</div></div></section></div>
+
+<section class="section"><div class="se">The Career Arc</div><h2 class="st">31 days. 4 promotions. 1 mascot.</h2><p class="ss">Climb the ladder — but beware the donkey.</p><div class="hg"><div class="hc"><div class="hn">Level 1</div><div class="ht">Intern → Hired</div><div class="hd">Office politics and deadlines. 31 days to prove yourself.</div></div><div class="hc"><div class="hn">Level 2</div><div class="ht">Manager → Founder</div><div class="hd">Budget, team, product. 31 days to earn founder stripes.</div></div><div class="hc"><div class="hn">Level 3</div><div class="ht">CEO → Bear Market</div><div class="hd">Boardroom strategy. 31 days to unlock the final challenge.</div></div><div class="hc"><div class="hn">Final</div><div class="ht">Bear Market</div><div class="hd">One metric. Lose-lose. Jumpscares. Global leaderboard.</div></div></div></section>
+
+<div class="ds" id="da"><div class="dg2"><div class="dc"><div class="dk">What</div><div class="dtt">A stress-test for founders</div><div class="dbo">Compresses months of startup chaos into minutes of high-stakes decisions. Plus a mascot that punishes your mistakes.</div></div><div class="dc"><div class="dk">Why</div><div class="dtt">Build business instincts</div><div class="dbo">Trains pattern recognition under pressure. Surfaces cognitive biases before real money is on the line.</div></div><div class="dc"><div class="dk">When</div><div class="dtt">Team training &amp; prep</div><div class="dbo">Icebreakers, pre-launch readiness, accelerator demos, or scaring your co-founder.</div></div></div></div>
+
+<section class="section"><div class="se">Testimonials</div><h2 class="st">What founders say</h2><p class="ss">Real feedback from stress-tested founders.</p><div class="tg"><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">I lasted 14 days then the donkey showed up. My whole team screamed.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">We ran this at our offsite. The debrief was worth more than any consultant.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div><div class="tc"><div class="tp"><div class="tpp">Photo</div></div><div><p class="tq">The Performance Review is brutally accurate. Same blind spot my investors flagged.</p><div class="tnm">Founder Name</div><div class="trl">Replace with real testimonial</div></div></div></div></section>
+
+<footer><span class="fc">© 2025 CEO.SIM — A Founder Simulation</span><span class="ftg">No VCs harmed. <span>Honor system payments.</span></span></footer>
 
 <script>
+// ═══ IMAGE PATHS (folder structure) ═══
+const IMG={
+  jumpscare:['jumpscare/1.jpg','jumpscare/2.jpg','jumpscare/3.jpg'],
+  blockade:['success_blockade/1.jpg','success_blockade/2.jpg'],
+  win:['question_right/win.jpg'],
+  lose:['question_wrong/lose.jpg'],
+  avatar:'./donkey.png',
+  doodle:'./donkey.png'
+};
+function rndImg(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function setImages(){
+  document.getElementById('jsimg').src=rndImg(IMG.jumpscare);
+  document.getElementById('dbimg').src=rndImg(IMG.blockade);
+  document.querySelectorAll('.di').forEach(i=>{i.src=IMG.doodle;i.onerror=function(){this.style.display='none'}});
+  document.querySelectorAll('.di,#jsimg,#dbimg').forEach(i=>{i.onerror=function(){this.style.display='none'}});
+}
+
+// ═══ EBOOKS with PayPal ═══
+const EBOOKS={mood:{t:'The Burnout Blueprint',d:'Build sustainable energy at work.',icon:'&#128546;'},output:{t:'Deep Work Mastery',d:'Productivity for makers.',icon:'&#128187;'},rep:{t:'The Trust Playbook',d:'Rebuild reputation after setbacks.',icon:'&#129309;'},budget:{t:'The Bootstrap Bible',d:'Financial discipline for managers.',icon:'&#128176;'},product:{t:'Ship It Right',d:'Balance speed and quality.',icon:'&#128230;'},team:{t:'Leading Without Burning Out',d:'Sustainable high performance.',icon:'&#128101;'},cash:{t:'The Bootstrap Bible',d:'Cash management for startups.',icon:'&#128176;'},valuation:{t:'Bear Market Survival',d:'Navigate downturns and creditor pressure.',icon:'&#128200;'}};
+const PAYPAL_EBOOK='https://www.paypal.com/paypalme/LeandroSilvaSMM/2.49EUR';
+const PAYPAL_PASS='https://www.paypal.com/paypalme/LeandroSilvaSMM/0.99EUR';
+
+// ═══ SCENARIOS (30 per mode) ═══
+const FB={intern:[{text:"Manager wants bug fixed before lunch. Push through?",yes:[0,12,-5],no:[-8,-8,5]},{text:"Team lunch but behind. Skip it?",yes:[0,12,-10],no:[8,-10,10]},{text:"Cover for late colleague?",yes:[-5,0,10],no:[5,5,-12]},{text:"Bug in code review delays sprint. Flag it?",yes:[0,10,12],no:[5,-12,-8]},{text:"Optional HR training. Attend?",yes:[5,0,12],no:[0,8,-10]},{text:"Extra project, no support. Yes?",yes:[-10,10,8],no:[5,-8,-5]},{text:"Senior offers pair-program. Accept?",yes:[8,15,5],no:[0,-12,-5]},{text:"Disagree with assignment. Raise it?",yes:[-5,5,10],no:[5,-8,-8]},{text:"Deadline moved up. Work late?",yes:[-12,12,-5],no:[-5,-10,5]},{text:"Teammate's code breaks yours. Tell?",yes:[5,5,10],no:[0,-10,-8]},{text:"Write docs nobody reads?",yes:[0,8,12],no:[5,-5,-8]},{text:"Contradictory instructions. Ask?",yes:[-5,10,10],no:[5,-12,-5]},{text:"Junior needs code review. Help?",yes:[-8,0,12],no:[5,5,-8]},{text:"Colleague took credit. Speak up?",yes:[-8,0,15],no:[5,5,-10]},{text:"Shortcut — not proper. Use it?",yes:[0,15,-8],no:[0,-5,8]},{text:"Coworker job hunting. Keep secret?",yes:[0,0,12],no:[-5,0,-15]},{text:"Broke production. Admit?",yes:[-8,5,15],no:[5,-5,-12]},{text:"Present to team. Extra prep?",yes:[-8,10,12],no:[5,-5,-5]},{text:"Recruiter DMs you. Reply?",yes:[5,0,-10],no:[0,0,5]},{text:"Cut testing corners?",yes:[0,15,-12],no:[0,-5,8]},{text:"Lie on timesheet? Refuse?",yes:[0,0,15],no:[-5,-5,-15]},{text:"Stretch assignment. Accept?",yes:[-10,15,10],no:[5,-8,-5]},{text:"After-work drinks. Seniors there. Go?",yes:[-8,0,12],no:[8,0,-8]},{text:"Mentor struggling intern?",yes:[-10,5,15],no:[5,5,-8]},{text:"Skip-level visits. Mention struggles?",yes:[-5,0,12],no:[5,5,-5]},{text:"Duplicate tasks. Tell both managers?",yes:[-5,5,10],no:[5,-8,-8]},{text:"Boss praised wrong person. Correct?",yes:[-8,0,15],no:[5,5,-10]},{text:"All-hands over lunch. Stay?",yes:[-5,0,12],no:[5,0,-8]},{text:"Daily updates. Comply?",yes:[-5,-5,10],no:[5,5,-8]},{text:"Disagree with tech stack. Speak?",yes:[-5,10,8],no:[5,-8,-5]}],
+manager:[{text:"Dev wants 4-day week. Agree?",yes:[-8,-8,20,-5],no:[10,8,-20,-5]},{text:"Promote internal over external?",yes:[-8,10,18,-5],no:[10,-12,-15,5]},{text:"DB refactor — 3wk, 0 features?",yes:[-15,25,8,5],no:[18,-22,-5,-8]},{text:"360 feedback — truths?",yes:[0,5,12,15],no:[5,-5,-10,-12]},{text:"Star wants transfer. Let them?",yes:[0,0,10,15],no:[8,5,-20,-10]},{text:"Unlimited PTO?",yes:[-10,-5,22,10],no:[10,8,-12,-8]},{text:"$12k contractor?",yes:[-18,22,5,5],no:[12,-18,-8,-5]},{text:"Weekly 1:1s — 3hr extra?",yes:[-5,5,18,10],no:[8,-8,-12,-5]},{text:"Credit junior at all-hands?",yes:[0,0,15,18],no:[5,5,-12,-8]},{text:"New stack mid-quarter?",yes:[-12,18,15,-5],no:[10,-12,-10,-8]},{text:"Junior leads beyond exp?",yes:[-5,12,18,5],no:[8,-8,-12,0]},{text:"Kill status meeting?",yes:[0,12,15,5],no:[5,-10,-8,-5]},{text:"Team burned out. Pause?",yes:[-12,0,20,15],no:[10,-8,-5,-18]},{text:"Talented but late. PIP?",yes:[0,8,-5,-12],no:[5,-10,5,5]},{text:"$5k offsite for morale?",yes:[-12,0,18,15],no:[8,5,-10,-8]},{text:"Push back on deadline?",yes:[-8,5,5,15],no:[8,-10,-5,-12]},{text:"Open-source codebase?",yes:[0,12,15,-5],no:[5,-8,-8,5]},{text:"No-meeting Wednesday?",yes:[-5,15,12,8],no:[5,-8,-5,-5]},{text:"Remote abroad 1 month?",yes:[-5,-5,15,10],no:[5,5,-10,-8]},{text:"Promote internal to save $?",yes:[-5,8,15,12],no:[8,-10,-8,-10]},{text:"Top earner underperforming. Talk?",yes:[-5,8,5,-10],no:[5,-12,-5,5]},{text:"Underperformer must go?",yes:[0,12,-8,-15],no:[5,-10,5,5]},{text:"Demo unfinished features?",yes:[8,-12,8,-5],no:[-5,10,-8,5]},{text:"$8k agile coach?",yes:[-10,15,10,8],no:[8,-10,-5,-5]},{text:"Reorg for bottleneck?",yes:[-8,12,5,-10],no:[8,-10,-5,5]},{text:"Self-organise sprints?",yes:[0,8,15,10],no:[5,-5,-8,-5]},{text:"Conference for employee?",yes:[-8,5,15,10],no:[5,0,-8,-5]},{text:"Competitor leak info?",yes:[0,15,-15,0],no:[0,-5,10,0]},{text:"Public individual metrics?",yes:[0,12,-5,-15],no:[5,-8,5,10]},{text:"Tooling budget increase?",yes:[-10,15,8,12],no:[8,-12,-8,-5]}],
+ceo:[{text:"Competitor AI. Force weekend?",yes:[0,15,5,-25],no:[0,-10,-5,10]},{text:"Investor cash — fire cofounder?",yes:[30,0,-10,-30],no:[-10,0,10,15]},{text:"Pivot to AI — 6mo rebuild?",yes:[-25,20,10,-15],no:[10,-10,0,10]},{text:"Acquire competitor?",yes:[-30,10,20,-10],no:[10,-5,0,5]},{text:"All-in enterprise?",yes:[20,-10,5,-15],no:[-5,10,-5,10]},{text:"Down-round for runway?",yes:[25,-5,-20,0],no:[-15,5,10,0]},{text:"Launch 3 countries?",yes:[-20,10,20,-15],no:[10,-5,0,8]},{text:"COO — big equity?",yes:[-20,15,10,15],no:[10,-10,-5,-10]},{text:"Mandate RTO?",yes:[5,10,0,-35],no:[-5,-5,0,20]},{text:"Ignore tech debt?",yes:[20,-25,0,-10],no:[-15,20,0,10]},{text:"Release with bugs?",yes:[15,-20,-15,5],no:[-10,10,10,-5]},{text:"Cut support for runway?",yes:[20,0,-25,-10],no:[-10,0,15,5]},{text:"Partnership limits VCs?",yes:[20,10,-10,0],no:[-5,-5,5,5]},{text:"Customer churn threat. Deal?",yes:[-10,0,20,0],no:[5,0,-25,5]},{text:"PR firm $10k/mo?",yes:[-15,0,25,0],no:[8,0,-12,0]},{text:"Equity to top 5?",yes:[-15,10,10,20],no:[10,-8,-5,-18]},{text:"Kill 20%rev/80%tickets?",yes:[10,-15,5,12],no:[-5,5,-5,-8]},{text:"Venture debt 12%?",yes:[15,-5,-5,0],no:[-8,5,5,0]},{text:"Respond to article?",yes:[-5,0,12,-8],no:[5,0,-15,5]},{text:"Stack ranking?",yes:[8,8,-10,-20],no:[-5,-5,5,12]},{text:"Full remote?",yes:[15,-5,5,15],no:[-8,5,-5,-8]},{text:"Poach CTO?",yes:[-20,20,5,8],no:[8,-12,0,-5]},{text:"Freemium tier?",yes:[-10,10,15,-5],no:[8,-8,-5,5]},{text:"$40k patent?",yes:[-15,5,15,0],no:[8,0,-8,0]},{text:"Move HQ?",yes:[15,-5,-8,-12],no:[-8,5,5,5]},{text:"Celebrity ambassador?",yes:[-10,0,25,-5],no:[5,0,-10,0]},{text:"Hiring freeze?",yes:[15,-8,0,-12],no:[-10,5,5,8]},{text:"Fire VP Sales?",yes:[5,5,-8,-15],no:[-5,-8,5,8]},{text:"IPO early?",yes:[20,-10,-5,-15],no:[-5,5,5,8]},{text:"20% time?",yes:[-8,15,10,18],no:[8,-8,-5,-10]}],
+crisis:[{text:"Auditors — forensic team?",yes:-800000,no:-1500000},{text:"Whistleblower settlement?",yes:-600000,no:-2000000},{text:"Client 40% discount?",yes:-500000,no:-1200000},{text:"Board fly-in or video?",yes:-300000,no:-100000},{text:"Creditor repayment?",yes:-400000,no:-2000000},{text:"Bridge 25% for payroll?",yes:-700000,no:-1500000},{text:"Layoff 20%?",yes:-200000,no:-900000},{text:"PULLBACK: PE board seat?",yes:400000,no:-1000000},{text:"PULLBACK: Patent deal?",yes:800000,no:-200000},{text:"Sell product line?",yes:600000,no:-1200000},{text:"White-label license?",yes:500000,no:-400000},{text:"Public difficulties?",yes:-200000,no:-1000000},{text:"Cut SaaS?",yes:-100000,no:-300000},{text:"Revenue recognition?",yes:-300000,no:-800000},{text:"Buyer — banker?",yes:300000,no:-600000},{text:"Predatory 40% APR?",yes:-500000,no:-1200000},{text:"PULLBACK: Sovereign fund?",yes:600000,no:-800000},{text:"Sell IP $1M?",yes:700000,no:-500000},{text:"Debt-equity swap?",yes:-100000,no:-800000},{text:"All on sales?",yes:-300000,no:-700000},{text:"PULLBACK: Buy contracts?",yes:500000,no:-200000},{text:"Close intl offices?",yes:-200000,no:-600000},{text:"3yr prepaid lock?",yes:400000,no:-300000},{text:"Exec salary cut 50%?",yes:-100000,no:-500000},{text:"Sell HQ?",yes:300000,no:-200000},{text:"Gov bailout?",yes:600000,no:-1000000},{text:"Turnaround CEO?",yes:-200000,no:-800000},{text:"Supplier terms?",yes:-100000,no:-400000},{text:"PULLBACK: Hedge bridge?",yes:500000,no:-700000},{text:"White knight?",yes:-100000,no:-800000}]};
+const MODES={intern:{color:'#22c55e',label:'Intern',timerFn:d=>Math.max(9000,12000-Math.floor(d/4)*500),metrics:[{key:'mood',label:'Mood',color:'#4ade80',start:55},{key:'output',label:'Output',color:'#60a5fa',start:55},{key:'rep',label:'Rep',color:'#facc15',start:55}],promoTitle:'You Got Hired!',promoSub:'31 days survived. Time to manage a team.',promoIcon:'&#128188;',next:'manager'},
+manager:{color:'#3b82f6',label:'Manager',timerFn:d=>Math.max(6000,10000-Math.floor(d/3)*500),metrics:[{key:'budget',label:'Budget',color:'#4ade80',start:55},{key:'product',label:'Product',color:'#60a5fa',start:55},{key:'team',label:'Team',color:'#f472b6',start:55},{key:'rep',label:'Rep',color:'#facc15',start:55}],promoTitle:'You\'re a Founder!',promoSub:'31 days managed. The boardroom awaits.',promoIcon:'&#127942;',next:'ceo'},
+ceo:{color:'#eab308',label:'CEO',timerFn:d=>Math.max(5000,8000-Math.floor(d/3)*500),metrics:[{key:'cash',label:'Cash',color:'#4ade80',start:50},{key:'product',label:'Product',color:'#60a5fa',start:50},{key:'rep',label:'Rep',color:'#facc15',start:50},{key:'team',label:'Team',color:'#f472b6',start:50}],promoTitle:'Bear Market Unlocked!',promoSub:'31 CEO days. The final challenge awaits.',promoIcon:'&#128293;',next:'crisis'},
+crisis:{color:'#ef4444',label:'Bear Market',timerFn:d=>d>=10?5000:6000,metrics:[]}};
+const SHOP_ITEMS=[{id:'cash_b',name:'+10 Cash',desc:'Extra runway.',cost:100,key:'cash',val:10,icon:'&#128176;'},{id:'team_b',name:'+10 Team',desc:'Pre-motivated.',cost:100,key:'team',val:10,icon:'&#128101;'},{id:'product_b',name:'+10 Product',desc:'Quality head start.',cost:100,key:'product',val:10,icon:'&#128187;'},{id:'rep_b',name:'+10 Rep',desc:'Good press.',cost:100,key:'rep',val:10,icon:'&#127775;'},{id:'mood_b',name:'+10 Mood',desc:'Extra coffee.',cost:80,key:'mood',val:10,icon:'&#9749;'},{id:'budget_b',name:'+10 Budget',desc:'Emergency fund.',cost:80,key:'budget',val:10,icon:'&#128181;'}];
+
+// ═══ STATE ═══
+let mode='intern',days=0,cur=null,ti=null,mt={},val=0,revUsed=false,lostKey='',a80=0;
+let credits=500,bought=[],bonuses={};
+const SV=5000000,MV=10000000;
+const pools={intern:null,manager:null,ceo:null,crisis:null};
+const decks={intern:{a:[],i:0},manager:{a:[],i:0},ceo:{a:[],i:0},crisis:{a:[],i:0}};
+let user=null,selAvF='',selAvS='';
+let pvCallback=null;
+const JUMPSCARE_CHANCE=0.08;
+// ═══ PERSISTENCE ═══
+function saveGS(){try{localStorage.setItem('ceo_gs',JSON.stringify({mode,days,mt,val,revUsed,a80,bonuses}))}catch(e){}}
+function loadGS(){try{const s=localStorage.getItem('ceo_gs');return s?JSON.parse(s):null}catch(e){return null}}
+function clearGS(){try{localStorage.removeItem('ceo_gs')}catch(e){}}
+function getP(){try{return JSON.parse(localStorage.getItem('ceo_p')||'{}')}catch(e){return{}}}
+function saveP(p){try{localStorage.setItem('ceo_p',JSON.stringify(p))}catch(e){}}
+function loadU(){try{const d=localStorage.getItem('ceo_u');if(d)user=JSON.parse(d)}catch(e){}}
+function saveU(){try{localStorage.setItem('ceo_u',JSON.stringify(user))}catch(e){}}
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function initDeck(m){decks[m]={a:shuffle(pools[m]||FB[m]),i:0}}
+function draw(m){const d=decks[m];if(d.i>=d.a.length){d.a=shuffle(d.a);d.i=0}return d.a[d.i++]}
+async function tryLoad(m){try{const r=await fetch(`./scenarios/${m}.json`,{cache:'no-cache'});if(!r.ok)throw 0;const d=await r.json();if(Array.isArray(d)&&d.length)pools[m]=d}catch(e){}}
+Promise.all(['intern','manager','ceo','crisis'].map(tryLoad));
+function clamp(v){return Math.max(0,Math.min(100,Math.round(v)))}
+function fmtV(n){return '$'+Math.round(n).toLocaleString()}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// ═══ AVATAR ═══
+function buildAvPicker(){
+  const g=document.getElementById('avg');
+  const f=[{c:'',l:'Original'},{c:'av-intern',l:'Intern'},{c:'av-manager',l:'Manager'},{c:'av-ceo',l:'CEO'},{c:'av-crisis',l:'Chaos'}];
+  g.innerHTML=f.map((x,i)=>`<div class="avo ${i===0?'sel':''}" onclick="pickAv(this,'${x.c}')"><img src="${IMG.avatar}" class="${x.c}" onerror="this.parentElement.style.display='none'" alt="${x.l}"/><div class="avo-label">${x.l}</div></div>`).join('')+`<button type="button" class="aub" onclick="document.getElementById('sif').click()">Upload</button><input type="file" id="sif" accept="image/*" style="display:none" onchange="handleUp(this)"/>`;
+  selAvS=IMG.avatar;selAvF='';
+}
+function pickAv(el,c){document.querySelectorAll('.avo').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');selAvF=c;selAvS=IMG.avatar}
+function handleUp(i){if(!i.files||!i.files[0])return;const r=new FileReader();r.onload=e=>{selAvS=e.target.result;selAvF='';document.querySelectorAll('.avo').forEach(o=>o.classList.remove('sel'))};r.readAsDataURL(i.files[0])}
+function doSignIn(){
+  const n=document.getElementById('sin').value.trim(),e=document.getElementById('sieml').value.trim(),err=document.getElementById('sierr');
+  if(!n){err.textContent='Enter your name.';return}if(!e||!e.includes('@')){err.textContent='Enter a valid email.';return}
+  err.textContent='';user={name:n,email:e,avSrc:selAvS,avF:selAvF};saveU();updateNav();toMode();
+}
+function updateNav(){
+  const a=document.getElementById('nua');if(!user){a.innerHTML='';return}
+  a.innerHTML=`<div class="nu"><img class="na ${user.avF||''}" src="${user.avSrc}" onerror="this.style.display='none'"/><span class="nn">${esc(user.name)}</span></div>`;
+}
+
+// ═══ MODE CARDS ═══
+function buildMC(){
+  const p=getP(),g=document.getElementById('mgrid');
+  const cards=[
+    {m:'intern',locked:false,done:p.intern},
+    {m:'manager',locked:false,done:p.manager},
+    {m:'ceo',locked:false,done:p.ceo},
+    {m:'crisis',locked:!p.bearMarketUnlocked,done:false}
+  ];
+  g.innerHTML=cards.map(c=>{
+    const cfg=MODES[c.m];
+    const lockHtml=c.m==='crisis'&&c.locked?`<div class="badge badge-lock">&#128274; Locked</div>`:'';
+    const doneHtml=c.done?`<div class="badge badge-done">Done</div>`:'';
+    return `<div class="mc ${c.locked?'locked':''}" style="--mcc:${cfg.color}" onclick="selectMode('${c.m}')">
+      ${lockHtml}${doneHtml}
+      <div class="md" style="background:${cfg.color}"></div>
+      <div class="mn" style="color:${cfg.color}">${cfg.label}</div>
+      <div class="mds">${c.m==='crisis'?'One metric. Leaderboard eligible.':'Survive 31 days.'}</div>
+      <div class="mt" style="color:${cfg.color}">${c.m==='intern'?'12s→9s':c.m==='manager'?'10s→6s':c.m==='ceo'?'8s→5s':'6s→5s'}</div>
+      <div class="mms">${c.m==='crisis'?'Goal: Survive — Leaderboard':'Goal: 31 days'}</div>
+    </div>`}).join('');
+}
+function selectMode(m){if(m==='crisis'&&!getP().bearMarketUnlocked)return;mode=m;showShop()}
+
+// ═══ UNLOCK MECHANISMS ═══
+function buyEP(){
+  window.open(PAYPAL_PASS,'_blank');
+  pvCallback=()=>{const p=getP();p.bearMarketUnlocked=true;saveP(p);toast('Executive Pass — Bear Market unlocked!');buildMC()};
+  document.getElementById('pvt').textContent='Waiting for Executive Pass payment…';
+  document.getElementById('pvd').textContent='Complete the PayPal payment of 0.99€, then click Verify.';
+  document.getElementById('pvm').classList.add('active');
+}
+function redeemCode(){
+  const code=document.getElementById('redeem-input').value.trim().toUpperCase();
+  if(code==='DONKEY2026'){const p=getP();p.bearMarketUnlocked=true;saveP(p);toast('Code accepted — Bear Market unlocked!');buildMC();document.getElementById('redeem-input').value=''}
+  else{toast('Invalid code. Try again.')}
+}
+function verifyPayment(){document.getElementById('pvm').classList.remove('active');if(pvCallback){pvCallback();pvCallback=null}}
+function closePV(){document.getElementById('pvm').classList.remove('active');pvCallback=null}
+
+// ═══ SCREENS ═══
+const SCREENS=['sis','mss','shs','ps','os','prs','sus','fs'];
+function show(id){SCREENS.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active')}
+function toMode(){clearInterval(ti);clearGS();buildMC();show('mss')}
+
+// ═══ SHOP ═══
+function showShop(){
+  credits=500;bought=[];bonuses={};
+  if(mode==='crisis'){startGame();return}
+  const rel=SHOP_ITEMS.filter(it=>MODES[mode].metrics.some(m=>m.key===it.key));
+  if(!rel.length){startGame();return}
+  document.getElementById('shg').innerHTML=rel.map(it=>`<div class="shi" id="si-${it.id}" onclick="buyI('${it.id}')"><div class="shic">${it.icon}</div><div class="shin">${it.name}</div><div class="shid">${it.desc}</div><div class="ship">${it.cost} cr</div></div>`).join('');
+  document.getElementById('scr').textContent=credits;show('shs');
+}
+function buyI(id){if(bought.includes(id))return;const it=SHOP_ITEMS.find(x=>x.id===id);if(!it||credits<it.cost)return;credits-=it.cost;bought.push(id);bonuses[it.key]=(bonuses[it.key]||0)+it.val;document.getElementById('scr').textContent=credits;document.getElementById('si-'+id).classList.add('bought')}
+function startFromShop(){startGame()}
+
+// ═══ GAME ═══
+function buildM(){const b=document.getElementById('mb');b.innerHTML='';if(mode==='crisis'){b.style.display='none';document.getElementById('vb').style.display='block';return}document.getElementById('vb').style.display='none';b.style.display='grid';b.style.gridTemplateColumns=`repeat(${MODES[mode].metrics.length},1fr)`;MODES[mode].metrics.forEach(m=>{const s=Math.min(100,m.start+(bonuses[m.key]||0));mt[m.key]=s;b.innerHTML+=`<div class="met"><div class="mh"><span class="ml">${m.label}</span><span class="mv" id="v-${m.key}">${clamp(s)}/100</span></div><div class="mbg"><div class="mf" id="f-${m.key}" style="width:${clamp(s)}%;background:${m.color}"></div></div></div>`})}
+function updateB(){MODES[mode].metrics.forEach(m=>{const v=clamp(mt[m.key]),f=document.getElementById('f-'+m.key),vl=document.getElementById('v-'+m.key);if(f)f.style.width=v+'%';if(vl)vl.textContent=v+'/100'});document.getElementById('dn').textContent=days}
+function updateV(){val=Math.max(0,val);document.getElementById('va').textContent=fmtV(val);document.getElementById('vbf').style.width=Math.min(100,(val/MV)*100)+'%';document.getElementById('dn').textContent=days;const pr=val-SV;const l=document.getElementById('vpl');if(pr>0){l.textContent='▲ '+fmtV(pr);l.style.color='#4ade80'}else if(pr<0){l.textContent='▼ '+fmtV(Math.abs(pr));l.style.color='#f87171'}else l.textContent=''}
+
+function startGame(){
+  days=0;cur=null;revUsed=false;lostKey='';a80=0;initDeck(mode);
+  const c=MODES[mode];document.getElementById('tb').style.background=c.color;
+  const ind=document.getElementById('mind');ind.textContent=c.label;ind.style.cssText=`font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:8px;background:${c.color}22;color:${c.color};border:1px solid ${c.color}44`;
+  document.getElementById('dgl').textContent=mode==='crisis'?' (endless)':' / 31';
+  buildM();if(mode==='crisis'){val=SV;document.getElementById('bsl').style.display='none';updateV()}
+  show('ps');nextS();
+}
+
+function nextS(){
+  days++;document.getElementById('dn').textContent=days;saveGS();
+  if(mode!=='crisis'&&days>31){triggerPromo();return}
+  if(mode==='crisis'&&days>15)document.getElementById('bsl').style.display='inline-block';
+  // Check blockade: all metrics >80 for 5 consecutive turns
+  if(mode!=='crisis'){const allH=MODES[mode].metrics.every(m=>mt[m.key]>80);a80=allH?a80+1:0}
+  cur=draw(mode);document.getElementById('stxt').textContent=cur.text;
+  // Success Blockade
+  if(a80>=5){
+    document.getElementById('dblk').classList.add('active');
+    document.getElementById('stxt').style.visibility='hidden';
+    document.getElementById('dbimg').src=rndImg(IMG.blockade);
+  }
+  // Random jumpscare (low chance, CEO/Crisis only)
+  if((mode==='ceo'||mode==='crisis')&&Math.random()<JUMPSCARE_CHANCE)setTimeout(()=>triggerJS(),500+Math.random()*2000);
+  startTi();
+}
+function startTi(){
+  const dur=MODES[mode].timerFn(days);let el=0;clearInterval(ti);document.getElementById('tb').style.width='100%';
+  ti=setInterval(()=>{el+=50;document.getElementById('tb').style.width=Math.max(0,100-(el/dur*100))+'%';
+    // Remove blockade at 3s remaining
+    if((dur-el)/1000<=3){document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible'}
+    if(el>=dur){clearInterval(ti);shk();applyTO()}
+  },50);
+}
+const wrap=document.getElementById('gw');
+function shk(){wrap.classList.remove('shake');void wrap.offsetWidth;wrap.classList.add('shake')}
+function triggerJS(){
+  const js=document.getElementById('js');document.getElementById('jsimg').src=rndImg(IMG.jumpscare);
+  js.classList.add('active');wrap.classList.remove('mshk');void wrap.offsetWidth;wrap.classList.add('mshk');
+  setTimeout(()=>{js.classList.remove('active');wrap.classList.remove('mshk')},500);
+}
+
+function decide(ch){
+  if(!cur)return;clearInterval(ti);document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible';
+  const arr=ch==='y'?cur.yes:cur.no;
+  const neg=mode==='crisis'?(typeof arr==='number'&&arr<0):Array.isArray(arr)&&arr.some(v=>v<=-10);
+  if((mode==='ceo'||mode==='crisis')&&neg)triggerJS();
+  if(mode==='crisis')applyVd(arr);else applyId(arr);
+}
+function applyTO(){document.getElementById('dblk').classList.remove('active');document.getElementById('stxt').style.visibility='visible';a80=0;if(mode==='crisis')applyVd(-500000);else applyId(MODES[mode].metrics.map(()=>-10))}
+function applyId(a){if(a.some(v=>v<=-15))shk();MODES[mode].metrics.forEach((m,i)=>{mt[m.key]=(mt[m.key]||0)+a[i]});updateB();if(!checkO())setTimeout(nextS,350)}
+function applyVd(d){val+=d;updateV();if(val<=0){rFlash(()=>gameOver('valuation','Valuation hit zero.'));return}setTimeout(nextS,350)}
+function checkO(){if(mode==='crisis')return false;for(const m of MODES[mode].metrics){if(mt[m.key]<=0){lostKey=m.key;const nm=Object.fromEntries(MODES[mode].metrics.map(x=>[x.key,x.label]));rFlash(()=>gameOver(m.key,`${nm[m.key]} hit zero.`,nm));return true}}return false}
+function rFlash(cb){const e=document.getElementById('df');e.classList.remove('flashing');void e.offsetWidth;e.classList.add('flashing');setTimeout(()=>{e.classList.remove('flashing');cb()},950)}
+
+function triggerPromo(){
+  clearInterval(ti);clearGS();const c=MODES[mode],p=getP();p[mode]=true;
+  if(mode==='ceo'){p.bearMarketUnlocked=true}
+  saveP(p);
+  document.getElementById('pri').innerHTML=c.promoIcon;document.getElementById('pt2').textContent=c.promoTitle;document.getElementById('pst').textContent=c.promoSub;
+  // Show win image
+  const wi=document.getElementById('win-img');wi.src=rndImg(IMG.win);wi.style.display='block';wi.onerror=function(){this.style.display='none'};
+  toast(c.promoTitle);show('prs');
+}
+function doSell(){
+  clearInterval(ti);clearGS();const pr=val-SV;
+  document.getElementById('suv').textContent=fmtV(val);
+  const pb=document.getElementById('supb');pb.textContent=pr>=0?'Profit: +'+fmtV(pr):'Loss: -'+fmtV(Math.abs(pr));pb.className='prb '+(pr>=0?'prp':'prn');
+  document.getElementById('sut').textContent=pr>0?'Perfectly timed.':'Sold before zero.';
+  const swi=document.getElementById('sell-win-img');swi.src=rndImg(IMG.win);swi.style.display='block';swi.onerror=function(){this.style.display='none'};
+  show('sus');
+}
+
+// ═══ GAME OVER ═══
+function gameOver(lost,reason,nm={}){
+  clearInterval(ti);clearGS();lostKey=lost;
+  document.getElementById('or').textContent=reason;document.getElementById('dsv').textContent=days;
+  // Show lose image
+  const gi=document.getElementById('go-img');gi.src=rndImg(IMG.lose);gi.style.display='block';gi.onerror=function(){this.style.display='none'};
+  // Review
+  if(mode==='crisis'){document.getElementById('fbd').textContent=days;document.getElementById('fbm').textContent='Valuation';document.getElementById('fbb').textContent='—';document.getElementById('fbg').textContent=days>=20?'B':days>=10?'C':'D';document.getElementById('fbt').innerHTML='<strong>Bear market won.</strong> Exploit pullback scenarios faster.';if(user)autoSaveLB()}
+  else{const ks=MODES[mode].metrics.map(m=>m.key),best=ks.reduce((a,b)=>mt[a]>mt[b]?a:b);const gr=days>=31?'S':days>=25?'A':days>=15?'B':days>=8?'C':'D';const cp={mood:'<strong>Burnout.</strong>',output:'<strong>Output collapsed.</strong>',rep:'<strong>Reputation destroyed.</strong>',budget:'<strong>Budget blown.</strong>',product:'<strong>Product eroded.</strong>',team:'<strong>Team burned out.</strong>',cash:'<strong>Cash ran out.</strong>'};document.getElementById('fbd').textContent=days;document.getElementById('fbm').textContent=nm[lost]||lost;document.getElementById('fbb').textContent=nm[best]||best;document.getElementById('fbg').textContent=gr;document.getElementById('fbt').innerHTML=(cp[lost]||'')+(days>=20?' Strong run.':'')}
+  // Build buttons
+  const btns=document.getElementById('over-btns');
+  let html='';
+  if(mode!=='crisis'&&!revUsed)html+=`<button class="ob ob-gr" onclick="showAdModal()">Watch Ad to Continue</button>`;
+  if(EBOOKS[lost])html+=`<button class="ob ob-a" onclick="showEbookModal()">Founder E-Book Bundle</button>`;
+  html+=`<button class="ob ob-g" onclick="toMode()">Change Mode</button>`;
+  btns.innerHTML=html;
+  show('os');
+}
+
+// ═══ EBOOK MODAL ═══
+function showEbookModal(){
+  const b=EBOOKS[lostKey];if(!b)return;
+  document.getElementById('ebi').innerHTML=b.icon;document.getElementById('ebt').textContent=b.t;document.getElementById('ebd').textContent=b.d;
+  const btn=document.getElementById('ebb');
+  btn.textContent=`Buy "${b.t}" — 2.49€`;
+  btn.onclick=function(e){e.preventDefault();window.open(PAYPAL_EBOOK,'_blank');pvCallback=()=>{closeEb();toast('Thank you! Download link ready.');};document.getElementById('ebm').classList.remove('active');document.getElementById('pvt').textContent='Waiting for E-Book payment…';document.getElementById('pvd').textContent='Complete the PayPal payment of 2.49€, then click Verify.';document.getElementById('pvm').classList.add('active')};
+  document.getElementById('ebm').classList.add('active');
+}
+function closeEb(){document.getElementById('ebm').classList.remove('active')}
+
+// ═══ AD MODAL ═══
+function showAdModal(){
+  document.getElementById('adm').classList.add('active');
+  const t=document.getElementById('adt'),b=document.getElementById('adb'),s=document.getElementById('ads'),c=document.getElementById('adc');
+  c.disabled=true;let rem=15;t.textContent=rem;b.style.width='0%';s.textContent='Loading ad…';
+  setTimeout(()=>{s.textContent='Ad playing…'},2000);
+  const iv=setInterval(()=>{rem--;t.textContent=rem;b.style.width=((15-rem)/15*100)+'%';if(rem<=3)s.textContent='Almost done…';if(rem<=0){clearInterval(iv);s.textContent='Ad complete!';c.disabled=false;revUsed=true}},1000);
+}
+function finishRevive(){
+  document.getElementById('adm').classList.remove('active');
+  if(mode!=='crisis'){MODES[mode].metrics.forEach(m=>{mt[m.key]=Math.max(mt[m.key],50)});updateB()}
+  show('ps');setTimeout(nextS,300);
+}
+
+// ═══ QUIT ═══
+function promptQ(){clearInterval(ti);document.getElementById('qc').classList.add('show')}
+function cancelQ(){document.getElementById('qc').classList.remove('show');startTi()}
+function doQuit(){document.getElementById('qc').classList.remove('show');clearGS();document.getElementById('fnt').textContent=`You handed in your ${days}-day notice as ${MODES[mode].label}.`;show('fs')}
+
+// ═══ LEADERBOARD (Bear Market only) ═══
+async function autoSaveLB(){if(!user)return;try{await window.storage.set('lb:'+Date.now()+':'+Math.random().toString(36).slice(2,6),JSON.stringify({name:user.name,avSrc:user.avSrc,avF:user.avF||'',days,mode:'crisis',date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short'})}),true);loadLB()}catch(e){}}
+async function loadLB(){try{const r=await window.storage.list('lb:'),ks=(r.keys||[]),es=await Promise.all(ks.map(async k=>{try{const r2=await window.storage.get(k,true);return r2?JSON.parse(r2.value):null}catch(e){return null}}));renderLB(es.filter(e=>e&&e.mode==='crisis').sort((a,b)=>b.days-a.days).slice(0,15))}catch(e){renderLB([])}}
+function renderLB(es){const c=document.getElementById('lbc');if(!es.length){c.innerHTML='<div class="lem">No Bear Market scores yet.</div>';return}c.innerHTML=`<table class="lbt"><thead><tr><th>Rank</th><th>Founder</th><th>Days</th><th>Date</th></tr></thead><tbody>${es.map((e,i)=>{const av=e.avSrc?`<img class="la ${e.avF||''}" src="${e.avSrc}" onerror="this.style.display='none'"/>`:`<div style="width:22px;height:22px;border-radius:50%;background:var(--s3);display:inline-flex;align-items:center;justify-content:center;font-size:.4rem;font-weight:700;color:var(--t3)">${(e.name||'?').charAt(0)}</div>`;return`<tr><td style="font-weight:800;color:${i<3?['#f59e0b','#a3a3a3','#cd7c3f'][i]:'var(--t3)'}">${i+1}</td><td><div class="lnc">${av}<span class="ln">${esc(e.name)}</span></div></td><td style="font-weight:700;color:#f87171">${e.days}</td><td style="color:var(--t3);font-size:.7rem">${e.date||''}</td></tr>`}).join('')}</tbody></table>`}
+
+// ═══ ADMIN CSV EXPORT (Ctrl+Shift+D) ═══
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.shiftKey&&e.key==='D'){
+    e.preventDefault();
+    if(!user){toast('No user data found.');return}
+    const csv='Name,Email\n'+`"${user.name}","${user.email}"`;
+    const blob=new Blob([csv],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='ceo_sim_users.csv';a.click();
+    URL.revokeObjectURL(url);toast('CSV exported.');
+  }
+});
+// ═══ KEYBOARD ═══
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('ps').classList.contains('active'))return;
+  if(document.getElementById('qc').classList.contains('show'))return;
+  if(document.querySelector('.modal.active'))return;
+  if(e.key==='y'||e.key==='Y')decide('y');
+  else if(e.key==='n'||e.key==='N')decide('n');
+});
+document.getElementById('by').addEventListener('click',()=>decide('y'));
+document.getElementById('bn').addEventListener('click',()=>decide('n'));
+function toast(m){const t=document.getElementById('ut');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
+function scrollTo_(){document.getElementById('ga').scrollIntoView({behavior:'smooth'})}
+
+// ═══ INIT ═══
+loadU();setImages();buildAvPicker();
+if(user){updateNav();const gs=loadGS();if(gs&&gs.days>0){buildMC();mode=gs.mode;days=gs.days;mt=gs.mt;val=gs.val;revUsed=gs.revUsed;a80=gs.a80;bonuses=gs.bonuses||{};initDeck(mode);const c=MODES[mode];document.getElementById('tb').style.background=c.color;const ind=document.getElementById('mind');ind.textContent=c.label;ind.style.cssText=`font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:8px;background:${c.color}22;color:${c.color};border:1px solid ${c.color}44`;document.getElementById('dgl').textContent=mode==='crisis'?' (endless)':' / 31';buildM();if(mode==='crisis'){document.getElementById('bsl').style.display=days>15?'inline-block':'none';updateV()}else{Object.keys(mt).forEach(k=>{const el=document.getElementById('f-'+k);if(el)el.style.width=clamp(mt[k])+'%';const vl=document.getElementById('v-'+k);if(vl)vl.textContent=clamp(mt[k])+'/100'})}show('ps');nextS()}else{buildMC();show('mss')}}
+else show('sis');
+loadLB();
+
 // --- EMERGENCY SOCIAL PROOF PATCH ---
 // Fake User Counter
 const countElem = document.createElement('div');
 countElem.style = "position:fixed; bottom:10px; left:10px; color:#ffa500; font-family:monospace; font-size:12px; z-index:9999;";
 document.body.appendChild(countElem);
-let users = 1422;
+let users = 100;
 setInterval(() => { users += Math.floor(Math.random() * 3); countElem.innerText = `LIVE USERS: ${users.toLocaleString()}`; }, 3000);
 
 // Fake Leaderboard Data (If it doesn't exist)
